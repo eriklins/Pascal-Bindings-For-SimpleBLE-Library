@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Debug"/>
+    <Units>
+      <Unit>
+        <Filename Value="SimpleBleNotifyExample.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <CursorPos X="12" Y="30"/>
+        <UsageCount Value="43"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="simpleble.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SimpleBle"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="264"/>
+        <CursorPos X="133" Y="302"/>
+        <UsageCount Value="43"/>
+        <Loaded Value="True"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="28">
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="149" Column="74" TopLine="106"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="151" Column="24" TopLine="108"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="152" Column="71" TopLine="109"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="197" Column="62" TopLine="154"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="198" Column="64" TopLine="155"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="203" Column="24" TopLine="160"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="204" Column="80" TopLine="161"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="206" Column="24" TopLine="163"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="207" Column="77" TopLine="164"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="242" Column="140" TopLine="199"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="243" Column="99" TopLine="200"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="245" Column="149" TopLine="202"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="246" Column="108" TopLine="203"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="248" Column="149" TopLine="205"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="249" Column="108" TopLine="206"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="251" Column="218" TopLine="208"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="252" Column="101" TopLine="209"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="254" Column="220" TopLine="211"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="255" Column="103" TopLine="212"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="257" Column="147" TopLine="214"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="258" Column="106" TopLine="215"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="260" Column="151" TopLine="217"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="261" Column="110" TopLine="218"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="263" Column="152" TopLine="220"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="264" Column="111" TopLine="221"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="295" Column="19" TopLine="264"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="296" Column="19" TopLine="264"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="298" Column="19" TopLine="264"/>
+      </Position>
+      <Position>
+        <Filename Value="simpleble.pas"/>
+        <Caret Line="299" Column="19" TopLine="264"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>
