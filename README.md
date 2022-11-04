@@ -16,10 +16,8 @@ The SimpleBLE bindings come as a single-file Pascal unit and this is in the fold
 To actually use the SimpleBLE functions in the compiled application, the corresponding shared libraries need to be copied into the same path as the compiled application. (Alternatively other location could be used, provided it's on the PATH or it's some system wide location like Windows\System32 - however, at least the latter is usually not recommended.)
 
 Here is a list of required files:
-* **simpleble.pas**
-The Pascal unit with SimpleBLE bindings.
-* **simpleble-c.dll, simpleble.dll, fmt.dll**
-The three shared libraries with all the SimpleBLE functionality in. You need all three of them.
+* **simpleble.pas**: The Pascal unit with SimpleBLE bindings.
+* **simpleble-c.dll, simpleble.dll, fmt.dll**: The three shared libraries with all the SimpleBLE functionality in. You need all three of them.
 
 On Windows systems shared libraries use the extension ".dll", but on other systems this is different (like .so on Linux/Unix).
 
@@ -31,20 +29,17 @@ Currently the Pascal bindings have been implemented and tested with Lazarus vers
 ## Examples
 The original SimpleBLE project comes with three C examples, which have been ported to Lazarus:
 
-* **SimpleBleScanExample**
-A console application based on scan.c from SimpleBLE and demonstrates scanning for BLE advertisements from peripherals. The output shows a list of devices with device name (if present) and BLE MAC address.
-* **SimpleBleConnectExample**
-A console application based on connect.c from SimpleBLE and demonstrates
- * Scanning for BLE advertisements from peripherals like above.
- * Selecting a peripheral to connect to.
- * Fetch BLE services, characteristics and descriptors from the peripherals's GATT table and shows as a list.
-* **SimpleBleNotifyExample**
-A console application based on notify.c from SimpleBLE and demonstrates
- * Scanning for BLE advertisements from peripherals like above.
- * Selecting a peripheral to connect to.
- * Fetch BLE services, characteristics and descriptors from the peripherals's GATT table and shows as a list.
- * Selecting a characteristic and subscribe to notifications.
- * If characteristic value changes on the peripheral, the new values are shown.
+* **SimpleBleScanExample**: A console application based on scan.c from SimpleBLE and demonstrates scanning for BLE advertisements from peripherals. The output shows a list of devices with device name (if present) and BLE MAC address.
+* **SimpleBleConnectExample**: A console application based on connect.c from SimpleBLE and demonstrates
+  * Scanning for BLE advertisements from peripherals like above.
+  * Selecting a peripheral to connect to.
+  * Fetch BLE services, characteristics and descriptors from the peripherals's GATT table and shows as a list.
+* **SimpleBleNotifyExample**: A console application based on notify.c from SimpleBLE and demonstrates
+  * Scanning for BLE advertisements from peripherals like above.
+  * Selecting a peripheral to connect to.
+  * Fetch BLE services, characteristics and descriptors from the peripherals's GATT table and shows as a list.
+  * Selecting a characteristic and subscribe to notifications.
+  * If characteristic value changes on the peripheral, the new values are shown.
 
 There are some more examples, but those are C++ and weren't (yet...) ported to Pascal.
 
