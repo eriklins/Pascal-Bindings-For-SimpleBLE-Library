@@ -44,7 +44,7 @@ The original SimpleBLE project comes with three C examples, which have been port
 There are some more examples, but those are C++ and weren't (yet...) ported to Pascal.
 
 ## Releases
-Pre-built SimpleBLE shared libraries are available on the [releases tab](https://github.com/eriklins/Pascal-Bindings-For-SimpleBLE-Library/releases). Currently there are only Windows 64 bit DLLs available (more to come).
+Pre-built SimpleBLE shared libraries are available on the [releases tab](https://github.com/eriklins/Pascal-Bindings-For-SimpleBLE-Library/releases). Currently there are only Windows 64 bit and 32 bit DLLs available.
 
 ## Contributing/Feedback
 I'm far from being an expert in Pascal programming, but liked and used Lazarus/FreePascal for some projects. So, feedback / improvements / pull-requests / etc. are welcome!
