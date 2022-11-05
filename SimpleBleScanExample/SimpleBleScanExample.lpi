@@ -24,6 +24,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
+            <OtherUnitFiles Value="..\SimpleBleUnit"/>
             <UnitOutputDirectory Value="lib\$(TargetOS)-$(TargetCPU)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -50,6 +51,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
+            <OtherUnitFiles Value="..\SimpleBleUnit"/>
             <UnitOutputDirectory Value="lib\$(TargetOS)-$(TargetCPU)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -76,6 +78,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
+            <OtherUnitFiles Value="..\SimpleBleUnit"/>
             <UnitOutputDirectory Value="lib\$(TargetOS)-$(TargetCPU)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -102,6 +105,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
+            <OtherUnitFiles Value="..\SimpleBleUnit"/>
             <UnitOutputDirectory Value="lib\$(TargetOS)-$(TargetCPU)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -133,9 +137,8 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="simpleble.pas"/>
+        <Filename Value="..\SimpleBleUnit\simpleble.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="SimpleBle"/>
       </Unit>
     </Units>
   </ProjectOptions>
@@ -147,6 +150,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="..\SimpleBleUnit"/>
       <UnitOutputDirectory Value="lib\Debug"/>
     </SearchPaths>
     <Linking>

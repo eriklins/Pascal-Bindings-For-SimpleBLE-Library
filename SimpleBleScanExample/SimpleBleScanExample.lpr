@@ -19,8 +19,7 @@ uses
   {$IFDEF UNIX}
   cthreads,
   {$ENDIF}
-  Classes, SysUtils, CustApp, SimpleBle
-  { you can add units after this };
+  Classes, SysUtils, CustApp, SimpleBle;
 
 type
 
@@ -38,60 +37,60 @@ type
 
 { Callback functions for SimpleBLE }
 
-procedure adapter_on_scan_start(adapter: simpleble_adapter_t; userdata: PPointer);
+procedure AdapterOnScanStart(Adapter: TSimplebleAdapter; Userdata: PPointer);
 var
-  identifier: PChar;
+  Identifier: PChar;
 begin
-  identifier := simpleble_adapter_identifier(adapter);
-  if identifier = '' then
+  Identifier := simpleble_adapter_identifier(Adapter);
+  if Identifier = '' then
     Exit;
-  writeln('Adapter ' + identifier + ' started scanning.');
-  simpleble_free(@identifier);
+  WriteLn('Adapter ' + Identifier + ' started scanning.');
+  simpleble_free(@Identifier);
 end;
 
-procedure adapter_on_scan_stop(adapter: simpleble_adapter_t; userdata: PPointer);
+procedure AdapterOnScanStop(Adapter: TSimplebleAdapter; Userdata: PPointer);
 var
-  identifier: PChar;
+  Identifier: PChar;
 begin
-  identifier := simpleble_adapter_identifier(adapter);
-  if identifier = '' then
+  Identifier := simpleble_adapter_identifier(Adapter);
+  if Identifier = '' then
     Exit;
-  writeln('Adapter ' + identifier + ' stopped scanning.');
-  simpleble_free(@identifier);
+  WriteLn('Adapter ' + Identifier + ' stopped scanning.');
+  simpleble_free(@Identifier);
 end;
 
-procedure adapter_on_scan_found(adapter: simpleble_adapter_t; peripheral: simpleble_peripheral_t; userdata: PPointer);
+procedure AdapterOnScanFound(Adapter: TSimplebleAdapter; Peripheral: TSimpleBlePeripheral; Userdata: PPointer);
 var
-  adapter_identifier: PChar;
-  peripheral_identifier: PChar;
-  peripheral_address: PChar;
+  AdapterIdentifier: PChar;
+  PeripheralIdentifier: PChar;
+  PeripheralAddress: PChar;
 begin
-  adapter_identifier := simpleble_adapter_identifier(adapter);
-  peripheral_identifier := simpleble_adapter_identifier(peripheral);
-  peripheral_address := simpleble_peripheral_address(peripheral);
-  if (adapter_identifier = '') or (peripheral_address = '') then
+  AdapterIdentifier := simpleble_adapter_identifier(Adapter);
+  PeripheralIdentifier := simpleble_adapter_identifier(Peripheral);
+  PeripheralAddress := simpleble_peripheral_address(Peripheral);
+  if (AdapterIdentifier = '') or (PeripheralAddress = '') then
     Exit;
-  writeln('Adapter ' + adapter_identifier + ' found device: ' + peripheral_identifier + ' [' + peripheral_address + ']');
-  simpleble_peripheral_release_handle(peripheral);
-  simpleble_free(@peripheral_address);
-  simpleble_free(@peripheral_identifier);
+  WriteLn('Adapter ' + AdapterIdentifier + ' found device: ' + PeripheralIdentifier + ' [' + PeripheralAddress + ']');
+  simpleble_peripheral_release_handle(Peripheral);
+  simpleble_free(@PeripheralAddress);
+  simpleble_free(@PeripheralIdentifier);
 end;
 
-procedure adapter_on_scan_updated(adapter: simpleble_adapter_t; peripheral: simpleble_peripheral_t; userdata: PPointer);
+procedure AdapterOnScanUpdated(Adapter: TSimplebleAdapter; Peripheral: TSimpleBlePeripheral; Userdata: PPointer);
 var
-  adapter_identifier: PChar;
-  peripheral_identifier: PChar;
-  peripheral_address: PChar;
+  AdapterIdentifier: PChar;
+  PeripheralIdentifier: PChar;
+  PeripheralAddress: PChar;
 begin
-  adapter_identifier := simpleble_adapter_identifier(adapter);
-  peripheral_identifier := simpleble_adapter_identifier(peripheral);
-  peripheral_address := simpleble_peripheral_address(peripheral);
-  if (adapter_identifier = '') or (peripheral_address = '') then
+  AdapterIdentifier := simpleble_adapter_identifier(Adapter);
+  PeripheralIdentifier := simpleble_adapter_identifier(Peripheral);
+  PeripheralAddress := simpleble_peripheral_address(Peripheral);
+  if (AdapterIdentifier = '') or (PeripheralAddress = '') then
     Exit;
-  writeln('Adapter ' + adapter_identifier + ' updated device: ' + peripheral_identifier + ' [' + peripheral_address + ']');
-  simpleble_peripheral_release_handle(peripheral);
-  simpleble_free(@peripheral_address);
-  simpleble_free(@peripheral_identifier);
+  WriteLn('Adapter ' + AdapterIdentifier + ' updated device: ' + PeripheralIdentifier + ' [' + PeripheralAddress + ']');
+  simpleble_peripheral_release_handle(Peripheral);
+  simpleble_free(@PeripheralAddress);
+  simpleble_free(@PeripheralIdentifier);
 end;
 
 { -------------------------------- }
@@ -100,7 +99,7 @@ end;
 procedure TSimpleBleScanExample.DoRun;
 var
   ErrorMsg: String;
-  adapter: simpleble_adapter_t;
+  Adapter: TSimplebleAdapter;
 
 begin
   // quick check parameters
@@ -121,35 +120,35 @@ begin
   // look for BLE adapters
   if simpleble_adapter_get_count() = 0 then
   begin
-    writeln('No BLE adapter was found.');
+    WriteLn('No BLE adapter was found.');
     Terminate;
     Exit;
   end;
 
-  // get a handle for the BLE adapter
-  adapter := simpleble_adapter_get_handle(0);
-  if adapter = 0 then
+  // get a handle for the BLE Adapter
+  Adapter := simpleble_adapter_get_handle(0);
+  if Adapter = 0 then
   begin
-    writeln('Could not get handle for BLE adapter.');
+    WriteLn('Could not get handle for BLE adapter.');
     Terminate;
     Exit
   end;
-  writeln('Found BLE adapter and got handle.');
+  WriteLn('Found BLE adapter and got handle.');
 
   // register SimpleBLE scan callback functions
-  simpleble_adapter_set_callback_on_scan_start(adapter, @adapter_on_scan_start, Nil);
-  simpleble_adapter_set_callback_on_scan_stop(adapter, @adapter_on_scan_stop, Nil);
-  simpleble_adapter_set_callback_on_scan_found(adapter, @adapter_on_scan_found, Nil);
-  simpleble_adapter_set_callback_on_scan_updated(adapter, @adapter_on_scan_updated, Nil);
+  simpleble_adapter_set_callback_on_scan_start(Adapter, @AdapterOnScanStart, Nil);
+  simpleble_adapter_set_callback_on_scan_stop(Adapter, @AdapterOnScanStop, Nil);
+  simpleble_adapter_set_callback_on_scan_found(Adapter, @AdapterOnScanFound, Nil);
+  simpleble_adapter_set_callback_on_scan_updated(Adapter, @AdapterOnScanUpdated, Nil);
 
   // start BLE scanning for 5 seconds
-  simpleble_adapter_scan_for(adapter, 5000);
+  simpleble_adapter_scan_for(Adapter, 5000);
 
   // wait for enter key
-  readln();
+  ReadLn();
 
   // release the BLE handle
-  simpleble_adapter_release_handle(adapter);
+  simpleble_adapter_release_handle(Adapter);
 
   // stop program loop
   Terminate;
@@ -169,7 +168,7 @@ end;
 procedure TSimpleBleScanExample.WriteHelp;
 begin
   { add your help code here }
-  writeln('Usage: ', ExeName, ' -h');
+  WriteLn('Usage: ', ExeName, ' -h');
 end;
 
 

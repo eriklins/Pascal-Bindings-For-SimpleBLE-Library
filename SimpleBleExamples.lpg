@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectGroup FileVersion="2">
+    <Targets>
+      <Target FileName="SimpleBleScanExample\SimpleBleScanExample.lpi">
+        <BuildModes>
+          <Mode Name="Debug"/>
+          <Mode Name="Win64"/>
+          <Mode Name="Win32"/>
+          <Mode Name="Linux64"/>
+          <Mode Name="Linux32"/>
+        </BuildModes>
+      </Target>
+      <Target FileName="SimpleBleConnectExample\SimpleBleConnectExample.lpi">
+        <BuildModes>
+          <Mode Name="Debug" Compile="True"/>
+          <Mode Name="Win64"/>
+          <Mode Name="Win32"/>
+          <Mode Name="Linux64"/>
+          <Mode Name="Linux32"/>
+        </BuildModes>
+      </Target>
+      <Target FileName="SimpleBleNotifyExample\SimpleBleNotifyExample.lpi">
+        <BuildModes>
+          <Mode Name="Debug" Compile="True"/>
+          <Mode Name="Win64"/>
+          <Mode Name="Win32"/>
+          <Mode Name="Linux64"/>
+          <Mode Name="Linux32"/>
+        </BuildModes>
+      </Target>
+    </Targets>
+  </ProjectGroup>
+</CONFIG>

@@ -19,8 +19,7 @@ uses
   {$IFDEF UNIX}
   cthreads,
   {$ENDIF}
-  Classes, SysUtils, CustApp, SimpleBle
-  { you can add units after this };
+  Classes, SysUtils, CustApp, SimpleBle;
 
 type
 
@@ -35,9 +34,9 @@ type
     procedure WriteHelp; virtual;
   end;
 
-  service_characteristic_t = record
-    service: simpleble_uuid_t;
-    characteristic: simpleble_uuid_t;
+  TServiceCharacteristic = record
+    Service: TSimpleBleUuid;
+    Characteristic: TSimpleBleUuid;
   end;
 
 
@@ -46,71 +45,71 @@ const
   SERVICES_LIST_SIZE = 32;
 
 var
-  characteristic_list: array [0..SERVICES_LIST_SIZE-1] of service_characteristic_t;
-  peripheral_list: array [0..PERIPHERAL_LIST_SIZE-1] of simpleble_peripheral_t;
-  peripheral_list_len: size_t = 0;
-  adapter: simpleble_adapter_t = 0;
+  CharacteristicList: array [0..SERVICES_LIST_SIZE-1] of TServiceCharacteristic;
+  PeripheralList: array [0..PERIPHERAL_LIST_SIZE-1] of TSimpleBlePeripheral;
+  PeripheralListLen: NativeUInt = 0;
+  Adapter: TSimpleBleAdapter = 0;
 
 
 { Callback functions for SimpleBLE }
 
-procedure adapter_on_scan_start(adapter: simpleble_adapter_t; userdata: PPointer);
+procedure AdapterOnScanStart(Adapter: TSimpleBleAdapter; Userdata: PPointer);
 var
-  identifier: PChar;
+  Identifier: PChar;
 begin
-  identifier := simpleble_adapter_identifier(adapter);
-  if identifier = '' then
+  Identifier := simpleble_adapter_identifier(Adapter);
+  if Identifier = '' then
     Exit;
-  writeln('Adapter ' + identifier + ' started scanning.');
-  simpleble_free(@identifier);
+  WriteLn('Adapter ' + Identifier + ' started scanning.');
+  simpleble_free(@Identifier);
 end;
 
-procedure adapter_on_scan_stop(adapter: simpleble_adapter_t; userdata: PPointer);
+procedure AdapterOnScanStop(Adapter: TSimpleBleAdapter; Userdata: PPointer);
 var
-  identifier: PChar;
+  Identifier: PChar;
 begin
-  identifier := simpleble_adapter_identifier(adapter);
-  if identifier = '' then
+  Identifier := simpleble_adapter_identifier(Adapter);
+  if Identifier = '' then
     Exit;
-  writeln('Adapter ' + identifier + ' started scanning.');
-  simpleble_free(@identifier);
+  WriteLn('Adapter ' + Identifier + ' started scanning.');
+  simpleble_free(@Identifier);
 end;
 
-procedure adapter_on_scan_found(adapter: simpleble_adapter_t; peripheral: simpleble_peripheral_t; userdata: PPointer);
+procedure AdapterOnScanFound(Adapter: TSimpleBleAdapter; Peripheral: TSimpleBlePeripheral; Userdata: PPointer);
 var
-  adapter_identifier: PChar;
-  peripheral_identifier: PChar;
-  peripheral_address: PChar;
+  AdapterIdentifier: PChar;
+  PeripheralIdentifier: PChar;
+  PeripheralAddress: PChar;
 begin
-  adapter_identifier := simpleble_adapter_identifier(adapter);
-  peripheral_identifier := simpleble_adapter_identifier(peripheral);
-  peripheral_address := simpleble_peripheral_address(peripheral);
-  if (adapter_identifier = '') or (peripheral_address = '') then
+  AdapterIdentifier := simpleble_adapter_identifier(adapter);
+  PeripheralIdentifier := simpleble_adapter_identifier(peripheral);
+  PeripheralAddress := simpleble_peripheral_address(peripheral);
+  if (AdapterIdentifier = '') or (PeripheralAddress = '') then
     Exit;
-  writeln('Adapter ' + adapter_identifier + ' found device: ' + peripheral_identifier + ' [' + peripheral_address + ']');
-  if peripheral_list_len < PERIPHERAL_LIST_SIZE then
+  WriteLn('Adapter ' + AdapterIdentifier + ' found device: ' + PeripheralIdentifier + ' [' + PeripheralAddress + ']');
+  if PeripheralListLen < PERIPHERAL_LIST_SIZE then
   begin
     // Save the peripheral
-    peripheral_list[peripheral_list_len] := peripheral;
-    Inc(peripheral_list_len)
+    PeripheralList[PeripheralListLen] := peripheral;
+    Inc(PeripheralListLen)
   end
   else
   begin
     // As there was no space left for this peripheral, release the associated handle.
     simpleble_peripheral_release_handle(peripheral);
   end;
-  simpleble_free(@peripheral_address);
-  simpleble_free(@peripheral_identifier);
+  simpleble_free(@PeripheralAddress);
+  simpleble_free(@PeripheralIdentifier);
 end;
 
-procedure peripheral_on_notify(service: simpleble_uuid_t; characteristic: simpleble_uuid_t; data: PByte; data_length: size_t; userdata: PPointer);
+procedure PeripheralOnNotify(Service: TSimpleBleUuid; Characteristic: TSimpleBleUuid; Data: PByte; DataLength: NativeUInt; Userdata: PPointer);
 var
   i: Integer;
 begin
-  write('Received[' + IntToStr(data_length) + ']: ');
-  for i := 0 to (data_length-1) do
+  write('Received[' + IntToStr(DataLength) + ']: ');
+  for i := 0 to (DataLength-1) do
     write(IntToStr(data[i]) + ' ');
-  writeln();
+  WriteLn();
 end;
 
 { -------------------------------- }
@@ -119,13 +118,13 @@ end;
 procedure TSimpleBleNotifyExample.DoRun;
 var
   ErrorMsg: String;
-  adapter: simpleble_adapter_t;
-  err_code: simpleble_err_t = SIMPLEBLE_SUCCESS;
-  i, j, k, selection, characteristic_count: Integer;
-  peripheral: simpleble_peripheral_t;
-  peripheral_identifier: PChar;
-  peripheral_address: PChar;
-  service: simpleble_service_t;
+  Adapter: TSimpleBleAdapter;
+  ErrCode: TSimpleBleErr = SIMPLEBLE_SUCCESS;
+  i, j, k, Selection, CharacteristicCount: Integer;
+  Peripheral: TSimpleBlePeripheral;
+  PeripheralIdentifier: PChar;
+  PeripheralAddress: PChar;
+  Service: TSimpleBleService;
 begin
   // quick check parameters
   ErrorMsg:=CheckOptions('h', 'help');
@@ -145,113 +144,114 @@ begin
   // look for BLE adapters
   if simpleble_adapter_get_count() = 0 then
   begin
-    writeln('No BLE adapter was found.');
+    WriteLn('No BLE adapter was found.');
     Terminate;
     Exit;
   end;
 
-  // get a handle for the BLE adapter
-  adapter := simpleble_adapter_get_handle(0);
-  if adapter = 0 then
+  // get a handle for the BLE Adapter
+  Adapter := simpleble_adapter_get_handle(0);
+  if Adapter = 0 then
   begin
-    writeln('Could not get handle for BLE adapter.');
+    WriteLn('Could not get handle for BLE adapter.');
     Terminate;
     Exit
   end;
-  writeln('Found BLE adapter and got handle.');
+  WriteLn('Found BLE adapter and got handle.');
 
   // register SimpleBLE scan callback functions
-  simpleble_adapter_set_callback_on_scan_start(adapter, @adapter_on_scan_start, Nil);
-  simpleble_adapter_set_callback_on_scan_stop(adapter, @adapter_on_scan_stop, Nil);
-  simpleble_adapter_set_callback_on_scan_found(adapter, @adapter_on_scan_found, Nil);
+  simpleble_adapter_set_callback_on_scan_start(Adapter, @AdapterOnScanStart, Nil);
+  simpleble_adapter_set_callback_on_scan_stop(Adapter, @AdapterOnScanStop, Nil);
+  simpleble_adapter_set_callback_on_scan_found(Adapter, @AdapterOnScanFound, Nil);
 
   // start BLE scanning for 5 seconds
-  simpleble_adapter_scan_for(adapter, 5000);
+  simpleble_adapter_scan_for(Adapter, 5000);
 
-  writeln('The following devices were found:');
-  for i := 0 to (peripheral_list_len - 1) do
+  // list found Peripheral devices
+  WriteLn('The following devices were found:');
+  for i := 0 to (PeripheralListLen - 1) do
   begin
-    peripheral := peripheral_list[i];
-    peripheral_identifier := simpleble_peripheral_identifier(peripheral);
-    peripheral_address := simpleble_peripheral_address(peripheral);
-    writeln('[' + IntToStr(i) + '] ' + peripheral_identifier + ' [' + peripheral_address + ']');
-    simpleble_free(@peripheral_identifier);
-    simpleble_free(@peripheral_address);
+    Peripheral := PeripheralList[i];
+    PeripheralIdentifier := simpleble_peripheral_identifier(Peripheral);
+    PeripheralAddress := simpleble_peripheral_address(Peripheral);
+    WriteLn('[' + IntToStr(i) + '] ' + PeripheralIdentifier + ' [' + PeripheralAddress + ']');
+    simpleble_free(@PeripheralIdentifier);
+    simpleble_free(@PeripheralAddress);
   end;
 
   // select device to connect
-  selection := -1;
+  Selection := -1;
   write('Please select a device to connect to: ');
-  readln(selection);
-  if (selection < 0) or (selection >= peripheral_list_len) then
+  ReadLn(Selection);
+  if (Selection < 0) or (Selection >= PeripheralListLen) then
   begin
-    writeln('Invalid selection.');
+    WriteLn('Invalid selection.');
     Terminate;
   end;
 
   // connect to selected device
-  peripheral := peripheral_list[selection];
-  peripheral_identifier := simpleble_peripheral_identifier(peripheral);
-  peripheral_address := simpleble_peripheral_address(peripheral);
-  writeln('Connecting to ' + peripheral_identifier + ' [' + peripheral_address + ']');
-  simpleble_free(@peripheral_identifier);
-  simpleble_free(@peripheral_address);
-  err_code := simpleble_peripheral_connect(peripheral);
-  if err_code <> SIMPLEBLE_SUCCESS then
+  Peripheral := PeripheralList[Selection];
+  PeripheralIdentifier := simpleble_peripheral_identifier(Peripheral);
+  PeripheralAddress := simpleble_peripheral_address(Peripheral);
+  WriteLn('Connecting to ' + PeripheralIdentifier + ' [' + PeripheralAddress + ']');
+  simpleble_free(@PeripheralIdentifier);
+  simpleble_free(@PeripheralAddress);
+  ErrCode := simpleble_peripheral_connect(Peripheral);
+  if ErrCode <> SIMPLEBLE_SUCCESS then
   begin
-    writeln('Failed to connect.');
+    WriteLn('Failed to connect.');
     Terminate;
   end;
-  writeln('Successfully connected, listing services and characteristics.');
+  WriteLn('Successfully connected, listing services and characteristics.');
 
-  // show list of characteristics to select one
-  characteristic_count := 0;
-  for i := 0 to (simpleble_peripheral_services_count(peripheral)-1) do
+  // show list of characteristics to select one to subscribe to notifications
+  CharacteristicCount := 0;
+  for i := 0 to (simpleble_peripheral_services_count(Peripheral)-1) do
   begin
-    err_code := simpleble_peripheral_services_get(peripheral, i, service);
-    if err_code <> SIMPLEBLE_SUCCESS then
+    ErrCode := simpleble_peripheral_services_get(Peripheral, i, Service);
+    if ErrCode <> SIMPLEBLE_SUCCESS then
     begin
-      writeln('Failed to get service.');
+      WriteLn('Failed to get service.');
       Terminate;
     end;
-    for j := 0 to (service.characteristic_count-1) do
+    for j := 0 to (Service.CharacteristicCount-1) do
     begin
-      if characteristic_count >= SERVICES_LIST_SIZE then
+      if CharacteristicCount >= SERVICES_LIST_SIZE then
         break;
-      writeln('[' + IntToStr(characteristic_count) + '] ' + service.uuid.value + ' ' + service.characteristics[j].uuid.value);
-      characteristic_list[characteristic_count].service := service.uuid;
-      characteristic_list[characteristic_count].characteristic := service.characteristics[j].uuid;
-      Inc(characteristic_count);
+      WriteLn('[' + IntToStr(CharacteristicCount) + '] ' + Service.Uuid.Value + ' ' + Service.Characteristics[j].Uuid.Value);
+      CharacteristicList[CharacteristicCount].Service := Service.Uuid;
+      CharacteristicList[CharacteristicCount].Characteristic := Service.Characteristics[j].Uuid;
+      Inc(CharacteristicCount);
     end;
   end;
 
   // select characteristic to subsribe notifications
-  selection := -1;
+  Selection := -1;
   write('Please select characteristic to read from: ');
-  readln(selection);
-  if (selection < 0) or (selection >= characteristic_count) then
+  ReadLn(Selection);
+  if (Selection < 0) or (Selection >= CharacteristicCount) then
   begin
-    writeln('Invalid selection.');
+    WriteLn('Invalid selection.');
     Terminate;
   end;
 
   // subscribe to notification and register callback function
-  simpleble_peripheral_notify(peripheral, characteristic_list[selection].service, characteristic_list[selection].characteristic, @peripheral_on_notify, Nil);
+  simpleble_peripheral_notify(Peripheral, CharacteristicList[Selection].Service, CharacteristicList[Selection].Characteristic, @PeripheralOnNotify, Nil);
 
-  // sleep 5 sec, during these 5 secs the peripheral needs to update the characteristic value
+  // sleep 5 sec, during these 5 secs the Peripheral needs to update the characteristic value
   Sleep(5000);
 
   // unsubscribe notifications
-  simpleble_peripheral_unsubscribe(peripheral, characteristic_list[selection].service, characteristic_list[selection].characteristic);
+  simpleble_peripheral_unsubscribe(Peripheral, CharacteristicList[Selection].Service, CharacteristicList[Selection].Characteristic);
 
-  // disconnect from peripheral
-  simpleble_peripheral_disconnect(peripheral);
+  // disconnect from Peripheral
+  simpleble_peripheral_disconnect(Peripheral);
 
   // wait for enter
   ReadLn();
 
   // release the BLE handle
-  simpleble_adapter_release_handle(adapter);
+  simpleble_adapter_release_handle(Adapter);
 
   // stop program loop
   Terminate;
@@ -265,21 +265,21 @@ end;
 
 destructor TSimpleBleNotifyExample.Destroy;
 var
-  i: size_t;
+  i: Integer;
 begin
   inherited Destroy;
-  writeln('Releasing allocated resources.');
+  WriteLn('Releasing allocated resources.');
   // Release all saved peripherals
-  for i := 0 to (peripheral_list_len - 1) do
-    simpleble_peripheral_release_handle(peripheral_list[i]);
+  for i := 0 to (PeripheralListLen - 1) do
+    simpleble_peripheral_release_handle(PeripheralList[i]);
   // Let's not forget to release the associated handle.
-  simpleble_adapter_release_handle(adapter);
+  simpleble_adapter_release_handle(Adapter);
 end;
 
 procedure TSimpleBleNotifyExample.WriteHelp;
 begin
   { add your help code here }
-  writeln('Usage: ', ExeName, ' -h');
+  WriteLn('Usage: ', ExeName, ' -h');
 end;
 
 
