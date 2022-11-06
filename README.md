@@ -21,10 +21,7 @@ Here is a list of required files:
 
 On Windows systems shared libraries use the extension ".dll", but on other systems this is different (like .so on Linux/Unix).
 
-### Building the SimpleBLE Shared Libraries
-The SimpleBLE project comes with batch files / shell scripts for Windows / Linux which automagically compile the shared libraries. These are located in the "utils" folder of the SimpleBLE repo. The compiled libraries will go into "build\_simpleble/bin/Release". A suitable compiler needs to be installed, I used Visual Studio Community edition 2022 (64 bit), version 17.3.6 on Windows 10 / 64 bit.
-
-Currently the Pascal bindings have been implemented and tested with Lazarus version 2.3.0 and Free Pascal version 3.3.1 (installed 'trunk' with fpdupdeluxe) on Windows 10 / 64 bit. Other CPUs and OS's is work in progress.
+Currently the Pascal bindings have been implemented and tested with Lazarus version 2.3.0 and Free Pascal version 3.3.1 (installed 'trunk' with fpdupdeluxe) on Windows 10 / 64 bit and Ubuntu 20.04LTS / 64 bit.
 
 ## Examples
 The original SimpleBLE project comes with three C examples, which have been ported to Lazarus:
@@ -43,8 +40,22 @@ The original SimpleBLE project comes with three C examples, which have been port
 
 There are some more examples, but those are C++ and weren't (yet...) ported to Pascal.
 
+### Building the Examples
+On Windows the example projects build without issues.
+
+On Linux (tested on Ubuntu 20.04LTS) it's necessary to copy the shared libraries into the root folder of each example project.
+
+## Building the SimpleBLE Shared Libraries
+The SimpleBLE project comes with batch files / shell scripts for Windows / Linux which automagically compile the shared libraries. These are located in the "utils" folder of the SimpleBLE repo. However, for me it did not work under Linux/Ubuntu properly.
+
+### Windows
+When running the batch file, the compiled libraries will go into "build\_simpleble/bin/Release". A suitable compiler needs to be installed, I used Visual Studio Community edition 2022 (64 bit), version 17.3.6 on Windows 10 / 64 bit.
+
+### Linux
+On Linux please follow the instructions given at https://github.com/OpenBluetoothToolbox/SimpleBLE/blob/main/docs/simpleble/usage.rst.
+
 ## Releases
-Pre-built SimpleBLE shared libraries are available on the [releases tab](https://github.com/eriklins/Pascal-Bindings-For-SimpleBLE-Library/releases). Currently there are only Windows 64 bit and 32 bit DLLs available.
+Pre-built SimpleBLE shared libraries are available on the [releases tab](https://github.com/eriklins/Pascal-Bindings-For-SimpleBLE-Library/releases). Currently there are versions for Windows 64 bit / 32 bit as well as Linux 64 bit available.
 
 ## Contributing/Feedback
 I'm far from being an expert in Pascal programming, but liked and used Lazarus/FreePascal for some projects. So, feedback / improvements / pull-requests / etc. are welcome!
