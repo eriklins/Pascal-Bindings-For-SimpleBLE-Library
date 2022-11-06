@@ -53,7 +53,6 @@ begin
   if Identifier = '' then
     Exit;
   WriteLn('Adapter ' + Identifier + ' started scanning.');
-  simpleble_free(@Identifier);
 end;
 
 procedure AdapterOnScanStop(Adapter: TSimpleBleAdapter; Userdata: PPointer);
@@ -64,7 +63,6 @@ begin
   if Identifier = '' then
     Exit;
   WriteLn('Adapter ' + Identifier + ' started scanning.');
-  simpleble_free(@Identifier);
 end;
 
 procedure AdapterOnScanFound(Adapter: TSimpleBleAdapter; Peripheral: TSimpleBlePeripheral; Userdata: PPointer);
@@ -74,7 +72,7 @@ var
   PeripheralAddress: PChar;
 begin
   AdapterIdentifier := simpleble_adapter_identifier(Adapter);
-  PeripheralIdentifier := simpleble_adapter_identifier(Peripheral);
+  PeripheralIdentifier := simpleble_peripheral_identifier(Peripheral);
   PeripheralAddress := simpleble_peripheral_address(Peripheral);
   if (AdapterIdentifier = '') or (PeripheralAddress = '') then
     Exit;
@@ -90,8 +88,6 @@ begin
     // As there was no space left for this Peripheral, release the associated handle.
     simpleble_peripheral_release_handle(Peripheral);
   end;
-  simpleble_free(@PeripheralAddress);
-  simpleble_free(@PeripheralIdentifier);
 end;
 
 { -------------------------------- }
