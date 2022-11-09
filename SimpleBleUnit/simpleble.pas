@@ -38,9 +38,9 @@ const
   //#define SIMPLEBLE_UUID_STR_LEN 37  // 36 characters + null terminator
   //#define SIMPLEBLE_CHARACTERISTIC_MAX_COUNT 16
   //#define SIMPLEBLE_DESCRIPTOR_MAX_COUNT 16
-  //Note: in C array declaration the below is the number of elements,
+  //Note: in C array declaration the above is the number of elements,
   //hence in Pascal we need to subtract 1 in the array declaration
-  //like array[0..cSIMPLEBLE_UUID_STR_LEN-1]
+  //like array[0..SIMPLEBLE_UUID_STR_LEN-1]
   SIMPLEBLE_UUID_STR_LEN = 37;
   SIMPLEBLE_CHARACTERISTIC_MAX_COUNT = 16;
   SIMPLEBLE_DESCRIPTOR_MAX_COUNT = 16;
@@ -102,7 +102,8 @@ type
   //    // and the remaining 27 bytes are the manufacturer data.
   //} simpleble_manufacturer_data_t;
   TSimpleBleManufacturerData = record
-    ManufacturerId: Integer;
+    ManufacturerId: UInt16;
+    DataLength: NativeUInt;
     Data: array[0..27-1] of Byte
   end;
 
@@ -226,13 +227,13 @@ function simpleble_peripheral_unpair(handle: TSimpleBlePeripheral): TSimpleBleEr
 function simpleble_peripheral_services_count(handle: TSimpleBlePeripheral): NativeUInt; cdecl; external SimpleBleExtLibrary;
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_services_get(simpleble_peripheral_t handle, size_t index, simpleble_service_t* services);
-function simpleble_peripheral_services_get(handle: TSimpleBlePeripheral; index: NativeUInt; services: TSimpleBleService): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function simpleble_peripheral_services_get(handle: TSimpleBlePeripheral; index: NativeUInt; var services: TSimpleBleService): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
 
 //SIMPLEBLE_EXPORT size_t simpleble_peripheral_manufacturer_data_count(simpleble_peripheral_t handle);
 function simpleble_peripheral_manufacturer_data_count(handle: TSimpleBlePeripheral): NativeUInt; cdecl; external SimpleBleExtLibrary;
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_manufacturer_data_get(simpleble_peripheral_t handle, size_t index, simpleble_manufacturer_data_t* manufacturer_data);
-function simpleble_peripheral_manufacturer_data_get(handle: TSimpleBlePeripheral; index: NativeUInt; manufacturer_data: TSimpleBleManufacturerData): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function simpleble_peripheral_manufacturer_data_get(handle: TSimpleBlePeripheral; index: NativeUInt; var manufacturer_data: TSimpleBleManufacturerData): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_read(simpleble_peripheral_t handle, simpleble_uuid_t service, simpleble_uuid_t characteristic, uint8_t** data, size_t* data_length);
 function simpleble_peripheral_read(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; data: PByte; var data_length: NativeUInt): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;

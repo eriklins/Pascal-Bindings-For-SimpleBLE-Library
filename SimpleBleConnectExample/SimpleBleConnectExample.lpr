@@ -153,8 +153,6 @@ begin
     PeripheralIdentifier := simpleble_peripheral_identifier(Peripheral);
     PeripheralAddress := simpleble_peripheral_address(Peripheral);
     WriteLn('[' + IntToStr(i) + '] ' + PeripheralIdentifier + ' [' + PeripheralAddress + ']');
-    simpleble_free(@PeripheralIdentifier);
-    simpleble_free(@PeripheralAddress);
   end;
 
   // select a device to connect to
@@ -172,8 +170,6 @@ begin
   PeripheralIdentifier := simpleble_peripheral_identifier(Peripheral);
   PeripheralAddress := simpleble_peripheral_address(Peripheral);
   WriteLn('Connecting to ' + PeripheralIdentifier + ' [' + PeripheralAddress + ']');
-  simpleble_free(@PeripheralIdentifier);
-  simpleble_free(@PeripheralAddress);
   ErrCode := simpleble_peripheral_connect(Peripheral);
   if ErrCode <> SIMPLEBLE_SUCCESS then
   begin
