@@ -203,7 +203,7 @@ function simpleble_peripheral_identifier(handle: TSimpleBlePeripheral): PChar; c
 function simpleble_peripheral_address(handle: TSimpleBlePeripheral): PChar; cdecl; external SimpleBleExtLibrary;
 
 //SIMPLEBLE_EXPORT int16_t simpleble_peripheral_rssi(simpleble_peripheral_t handle);
-function simpleble_peripheral_rssi(handle: TSimpleBlePeripheral): Word; cdecl; external SimpleBleExtLibrary;
+function simpleble_peripheral_rssi(handle: TSimpleBlePeripheral): Int16; cdecl; external SimpleBleExtLibrary;
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_connect(simpleble_peripheral_t handle);
 function simpleble_peripheral_connect(handle: TSimpleBlePeripheral): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
