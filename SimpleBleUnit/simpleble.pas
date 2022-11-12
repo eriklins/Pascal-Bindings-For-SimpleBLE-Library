@@ -269,7 +269,7 @@ function simpleble_peripheral_set_callback_on_disconnected(handle: TSimpleBlePer
 { functions from SimpleBLE simpleble.h }
 
 //SIMPLEBLE_EXPORT void simpleble_free(void* handle);
-procedure simpleble_free(handle: PPointer); cdecl; external SimpleBleExtLibrary;
+procedure simpleble_free(var handle); cdecl; external SimpleBleExtLibrary;
 
 
 { functions from SimpleBLE logging.h }

@@ -53,6 +53,7 @@ begin
   if Identifier = '' then
     Exit;
   WriteLn('Adapter ' + Identifier + ' started scanning.');
+  simpleble_free(Identifier);
 end;
 
 procedure AdapterOnScanStop(Adapter: TSimpleBleAdapter; Userdata: PPointer);
@@ -63,6 +64,7 @@ begin
   if Identifier = '' then
     Exit;
   WriteLn('Adapter ' + Identifier + ' started scanning.');
+  simpleble_free(Identifier);
 end;
 
 procedure AdapterOnScanFound(Adapter: TSimpleBleAdapter; Peripheral: TSimpleBlePeripheral; Userdata: PPointer);
@@ -88,6 +90,8 @@ begin
     // As there was no space left for this Peripheral, release the associated handle.
     simpleble_peripheral_release_handle(Peripheral);
   end;
+  simpleble_free(PeripheralIdentifier);
+  simpleble_free(PeripheralAddress);
 end;
 
 { -------------------------------- }
@@ -153,6 +157,8 @@ begin
     PeripheralIdentifier := simpleble_peripheral_identifier(Peripheral);
     PeripheralAddress := simpleble_peripheral_address(Peripheral);
     WriteLn('[' + IntToStr(i) + '] ' + PeripheralIdentifier + ' [' + PeripheralAddress + ']');
+    simpleble_free(PeripheralIdentifier);
+    simpleble_free(PeripheralAddress);
   end;
 
   // select a device to connect to
@@ -170,6 +176,8 @@ begin
   PeripheralIdentifier := simpleble_peripheral_identifier(Peripheral);
   PeripheralAddress := simpleble_peripheral_address(Peripheral);
   WriteLn('Connecting to ' + PeripheralIdentifier + ' [' + PeripheralAddress + ']');
+  simpleble_free(PeripheralIdentifier);
+  simpleble_free(PeripheralAddress);
   ErrCode := simpleble_peripheral_connect(Peripheral);
   if ErrCode <> SIMPLEBLE_SUCCESS then
   begin
