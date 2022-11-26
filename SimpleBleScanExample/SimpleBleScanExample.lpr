@@ -41,22 +41,22 @@ procedure AdapterOnScanStart(Adapter: TSimplebleAdapter; Userdata: PPointer);
 var
   Identifier: PChar;
 begin
-  Identifier := simpleble_adapter_identifier(Adapter);
+  Identifier := SimpleBleAdapterIdentifier(Adapter);
   if Identifier = '' then
     Exit;
   WriteLn('Adapter ' + Identifier + ' started scanning.');
-  simpleble_free(Identifier);
+  SimpleBleFree(Identifier);
 end;
 
 procedure AdapterOnScanStop(Adapter: TSimplebleAdapter; Userdata: PPointer);
 var
   Identifier: PChar;
 begin
-  Identifier := simpleble_adapter_identifier(Adapter);
+  Identifier := SimpleBleAdapterIdentifier(Adapter);
   if Identifier = '' then
     Exit;
   WriteLn('Adapter ' + Identifier + ' stopped scanning.');
-  simpleble_free(Identifier);
+  SimpleBleFree(Identifier);
 end;
 
 procedure AdapterOnScanFound(Adapter: TSimplebleAdapter; Peripheral: TSimpleBlePeripheral; Userdata: PPointer);
@@ -65,15 +65,15 @@ var
   PeripheralIdentifier: PChar;
   PeripheralAddress: PChar;
 begin
-  AdapterIdentifier := simpleble_adapter_identifier(Adapter);
-  PeripheralIdentifier := simpleble_peripheral_identifier(Peripheral);
-  PeripheralAddress := simpleble_peripheral_address(Peripheral);
+  AdapterIdentifier := SimpleBleAdapterIdentifier(Adapter);
+  PeripheralIdentifier := SimpleBlePeripheralIdentifier(Peripheral);
+  PeripheralAddress := SimpleBlePeripheralAddress(Peripheral);
   if (AdapterIdentifier = '') or (PeripheralAddress = '') then
     Exit;
   WriteLn('Adapter ' + AdapterIdentifier + ' found device: ' + PeripheralIdentifier + ' [' + PeripheralAddress + ']');
-  simpleble_peripheral_release_handle(Peripheral);
-  simpleble_free(PeripheralIdentifier);
-  simpleble_free(PeripheralAddress);
+  SimpleBlePeripheralReleaseHandle(Peripheral);
+  SimpleBleFree(PeripheralIdentifier);
+  SimpleBleFree(PeripheralAddress);
 end;
 
 procedure AdapterOnScanUpdated(Adapter: TSimplebleAdapter; Peripheral: TSimpleBlePeripheral; Userdata: PPointer);
@@ -82,15 +82,15 @@ var
   PeripheralIdentifier: PChar;
   PeripheralAddress: PChar;
 begin
-  AdapterIdentifier := simpleble_adapter_identifier(Adapter);
-  PeripheralIdentifier := simpleble_peripheral_identifier(Peripheral);
-  PeripheralAddress := simpleble_peripheral_address(Peripheral);
+  AdapterIdentifier := SimpleBleAdapterIdentifier(Adapter);
+  PeripheralIdentifier := SimpleBlePeripheralIdentifier(Peripheral);
+  PeripheralAddress := SimpleBlePeripheralAddress(Peripheral);
   if (AdapterIdentifier = '') or (PeripheralAddress = '') then
     Exit;
   WriteLn('Adapter ' + AdapterIdentifier + ' updated device: ' + PeripheralIdentifier + ' [' + PeripheralAddress + ']');
-  simpleble_peripheral_release_handle(Peripheral);
-  simpleble_free(PeripheralIdentifier);
-  simpleble_free(PeripheralAddress);
+  SimpleBlePeripheralReleaseHandle(Peripheral);
+  SimpleBleFree(PeripheralIdentifier);
+  SimpleBleFree(PeripheralAddress);
 end;
 
 { -------------------------------- }
@@ -118,7 +118,7 @@ begin
   end;
 
   // look for BLE adapters
-  if simpleble_adapter_get_count() = 0 then
+  if SimpleBleAdapterGetCount() = 0 then
   begin
     WriteLn('No BLE adapter was found.');
     Terminate;
@@ -126,7 +126,7 @@ begin
   end;
 
   // get a handle for the BLE Adapter
-  Adapter := simpleble_adapter_get_handle(0);
+  Adapter := SimpleBleAdapterGetHandle(0);
   if Adapter = 0 then
   begin
     WriteLn('Could not get handle for BLE adapter.');
@@ -136,19 +136,19 @@ begin
   WriteLn('Found BLE adapter and got handle.');
 
   // register SimpleBLE scan callback functions
-  simpleble_adapter_set_callback_on_scan_start(Adapter, @AdapterOnScanStart, Nil);
-  simpleble_adapter_set_callback_on_scan_stop(Adapter, @AdapterOnScanStop, Nil);
-  simpleble_adapter_set_callback_on_scan_found(Adapter, @AdapterOnScanFound, Nil);
-  simpleble_adapter_set_callback_on_scan_updated(Adapter, @AdapterOnScanUpdated, Nil);
+  SimpleBleAdapterSetCallbackOnScanStart(Adapter, @AdapterOnScanStart, Nil);
+  SimpleBleAdapterSetCallbackOnScanStop(Adapter, @AdapterOnScanStop, Nil);
+  SimpleBleAdapterSetCallbackOnScanFound(Adapter, @AdapterOnScanFound, Nil);
+  SimpleBleAdapterSetCallbackOnScanUpdated(Adapter, @AdapterOnScanUpdated, Nil);
 
   // start BLE scanning for 5 seconds
-  simpleble_adapter_scan_for(Adapter, 5000);
+  SimpleBleAdapterScanFor(Adapter, 5000);
 
   // wait for enter key
   ReadLn();
 
   // release the BLE handle
-  simpleble_adapter_release_handle(Adapter);
+  SimpleBleAdapterReleaseHandle(Adapter);
 
   // stop program loop
   Terminate;

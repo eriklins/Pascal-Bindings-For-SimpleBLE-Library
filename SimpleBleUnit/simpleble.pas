@@ -135,58 +135,58 @@ type
   TSimpleBleCallbackScanFound = procedure(adapter: TSimpleBleAdapter; peripheral: TSimpleBleAdapter; userdata: PPointer);
 
 //SIMPLEBLE_EXPORT bool simpleble_adapter_is_bluetooth_enabled(void);
-function simpleble_adapter_is_bluetooth_enabled(): Boolean; cdecl; external SimpleBleExtLibrary;
+function SimpleBleAdapterIsBluetoothEnabled(): Boolean; cdecl; external SimpleBleExtLibrary name 'simpleble_adapter_is_bluetooth_enabled';
 
 //SIMPLEBLE_EXPORT size_t simpleble_adapter_get_count(void);
-function simpleble_adapter_get_count(): NativeUInt; cdecl; external SimpleBleExtLibrary;
+function SimpleBleAdapterGetCount(): NativeUInt; cdecl; external SimpleBleExtLibrary name 'simpleble_adapter_get_count';
 
 //SIMPLEBLE_EXPORT simpleble_adapter_t simpleble_adapter_get_handle(size_t index);
-function simpleble_adapter_get_handle(index: NativeUInt): TSimpleBleAdapter; cdecl; external SimpleBleExtLibrary;
+function SimpleBleAdapterGetHandle(index: NativeUInt): TSimpleBleAdapter; cdecl; external SimpleBleExtLibrary name 'simpleble_adapter_get_handle';
 
 //SIMPLEBLE_EXPORT void simpleble_adapter_release_handle(simpleble_adapter_t handle);
-procedure simpleble_adapter_release_handle(handle: TSimpleBleAdapter); cdecl; external SimpleBleExtLibrary;
+procedure SimpleBleAdapterReleaseHandle(handle: TSimpleBleAdapter); cdecl; external SimpleBleExtLibrary name 'simpleble_adapter_release_handle';
 
 //SIMPLEBLE_EXPORT char* simpleble_adapter_identifier(simpleble_adapter_t handle);
-function simpleble_adapter_identifier(handle: TSimpleBleAdapter): PChar; cdecl; external SimpleBleExtLibrary;
+function SimpleBleAdapterIdentifier(handle: TSimpleBleAdapter): PChar; cdecl; external SimpleBleExtLibrary name 'simpleble_adapter_identifier';
 
 //SIMPLEBLE_EXPORT char* simpleble_adapter_address(simpleble_adapter_t handle);
-function simpleble_adapter_address(handle: TSimpleBleAdapter): PChar; cdecl; external SimpleBleExtLibrary;
+function SimpleBleAdapterAddress(handle: TSimpleBleAdapter): PChar; cdecl; external SimpleBleExtLibrary name 'simpleble_adapter_address';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_adapter_scan_start(simpleble_adapter_t handle);
-function simpleble_adapter_scan_start(handle: TSimpleBleAdapter): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBleAdapterScanStart(handle: TSimpleBleAdapter): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_adapter_scan_start';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_adapter_scan_stop(simpleble_adapter_t handle);
-function simpleble_adapter_scan_stop(handle: TSimpleBleAdapter): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBleAdapterScanStop(handle: TSimpleBleAdapter): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_adapter_scan_stop';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_adapter_scan_is_active(simpleble_adapter_t handle, bool* active);
-function simpleble_adapter_scan_is_active(handle: TSimpleBleAdapter; var active: Boolean): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBleAdapterScanIsActive(handle: TSimpleBleAdapter; var active: Boolean): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_adapter_scan_is_active';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_adapter_scan_for(simpleble_adapter_t handle, int timeout_ms);
-function simpleble_adapter_scan_for(handle: TSimpleBleAdapter; timeout_ms: Integer): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBleAdapterScanFor(handle: TSimpleBleAdapter; timeout_ms: Integer): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_adapter_scan_for';
 
 //SIMPLEBLE_EXPORT size_t simpleble_adapter_scan_get_results_count(simpleble_adapter_t handle);
-function simpleble_adapter_scan_get_results_count(handle: TSimpleBleAdapter): NativeUInt; cdecl; external SimpleBleExtLibrary;
+function SimpleBleAdapterScanGetResultsCount(handle: TSimpleBleAdapter): NativeUInt; cdecl; external SimpleBleExtLibrary name 'simpleble_adapter_scan_get_results_count';
 
 //SIMPLEBLE_EXPORT simpleble_peripheral_t simpleble_adapter_scan_get_results_handle(simpleble_adapter_t handle, size_t index);
-function simpleble_adapter_scan_get_results_handle(handle: TSimpleBleAdapter; index: NativeUInt): TSimpleBlePeripheral; cdecl; external SimpleBleExtLibrary;
+function SimpleBleAdapterScanGetResultsHandle(handle: TSimpleBleAdapter; index: NativeUInt): TSimpleBlePeripheral; cdecl; external SimpleBleExtLibrary name 'simpleble_adapter_scan_get_results_handle';
 
 //SIMPLEBLE_EXPORT size_t simpleble_adapter_get_paired_peripherals_count(simpleble_adapter_t handle);
-function simpleble_adapter_get_paired_peripherals_count(handle: TSimpleBleAdapter): NativeUInt; cdecl; external SimpleBleExtLibrary;
+function SimpleBleAdapterGetPairedPeripheralsCount(handle: TSimpleBleAdapter): NativeUInt; cdecl; external SimpleBleExtLibrary name 'simpleble_adapter_get_paired_peripherals_count';
 
 //SIMPLEBLE_EXPORT simpleble_peripheral_t simpleble_adapter_get_paired_peripherals_handle(simpleble_adapter_t handle, size_t index);
-function simpleble_adapter_get_paired_peripherals_handle(handle: TSimpleBleAdapter; index: NativeUInt): TSimpleBlePeripheral; cdecl; external SimpleBleExtLibrary;
+function SimpleBleAdapterGetPairedPeripheralsHandle(handle: TSimpleBleAdapter; index: NativeUInt): TSimpleBlePeripheral; cdecl; external SimpleBleExtLibrary name 'simpleble_adapter_get_paired_peripherals_handle';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_adapter_set_callback_on_scan_start(simpleble_adapter_t handle, void (*callback)(simpleble_adapter_t adapter, void* userdata), void* userdata);
-function simpleble_adapter_set_callback_on_scan_start(handle: TSimpleBleAdapter; callback: TSimpleBleCallbackScanStart; userdata: PPointer): TSimpleBleErr;  cdecl; external SimpleBleExtLibrary;
+function SimpleBleAdapterSetCallbackOnScanStart(handle: TSimpleBleAdapter; callback: TSimpleBleCallbackScanStart; userdata: PPointer): TSimpleBleErr;  cdecl; external SimpleBleExtLibrary name 'simpleble_adapter_set_callback_on_scan_start';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_adapter_set_callback_on_scan_stop(simpleble_adapter_t handle, void (*callback)(simpleble_adapter_t adapter, void* userdata), void* userdata);
-function simpleble_adapter_set_callback_on_scan_stop(handle: TSimpleBleAdapter; callback: TSimpleBleCallbackScanStop; userdata: PPointer): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBleAdapterSetCallbackOnScanStop(handle: TSimpleBleAdapter; callback: TSimpleBleCallbackScanStop; userdata: PPointer): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_adapter_set_callback_on_scan_stop';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_adapter_set_callback_on_scan_updated(simpleble_adapter_t handle, void (*callback)(simpleble_adapter_t adapter, simpleble_peripheral_t peripheral, void* userdata), void* userdata);
-function simpleble_adapter_set_callback_on_scan_updated(handle: TSimpleBleAdapter; callback: TSimpleBleCallbackScanUpdated; userdata: PPointer): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBleAdapterSetCallbackOnScanUpdated(handle: TSimpleBleAdapter; callback: TSimpleBleCallbackScanUpdated; userdata: PPointer): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_adapter_set_callback_on_scan_updated';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_adapter_set_callback_on_scan_found(simpleble_adapter_t handle, void (*callback)(simpleble_adapter_t adapter, simpleble_peripheral_t peripheral, void* userdata), void* userdata);
-function simpleble_adapter_set_callback_on_scan_found(handle: TSimpleBleAdapter; callback: TSimpleBleCallbackScanFound; userdata: PPointer): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBleAdapterSetCallbackOnScanFound(handle: TSimpleBleAdapter; callback: TSimpleBleCallbackScanFound; userdata: PPointer): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_adapter_set_callback_on_scan_found';
 
 
 { functions from SimpleBLE peripheral.h }
@@ -199,85 +199,85 @@ type
   TSimpleBleCallbackIndicate = procedure(service: TSimpleBleUuid; characteristic: TSimpleBleUuid; data: PByte; data_length: NativeUInt; userdata: PPointer);
 
 //SIMPLEBLE_EXPORT void simpleble_peripheral_release_handle(simpleble_peripheral_t handle);
-procedure simpleble_peripheral_release_handle(handle: TSimpleBlePeripheral); cdecl; external SimpleBleExtLibrary;
+procedure SimpleBlePeripheralReleaseHandle(handle: TSimpleBlePeripheral); cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_release_handle';
 
 //SIMPLEBLE_EXPORT char* simpleble_peripheral_identifier(simpleble_peripheral_t handle);
-function simpleble_peripheral_identifier(handle: TSimpleBlePeripheral): PChar; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralIdentifier(handle: TSimpleBlePeripheral): PChar; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_identifier';
 
 //SIMPLEBLE_EXPORT char* simpleble_peripheral_address(simpleble_peripheral_t handle);
-function simpleble_peripheral_address(handle: TSimpleBlePeripheral): PChar; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralAddress(handle: TSimpleBlePeripheral): PChar; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_address';
 
 //SIMPLEBLE_EXPORT int16_t simpleble_peripheral_rssi(simpleble_peripheral_t handle);
-function simpleble_peripheral_rssi(handle: TSimpleBlePeripheral): Int16; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralRssi(handle: TSimpleBlePeripheral): Int16; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_rssi';
 
 //SIMPLEBLE_EXPORT uint16_t simpleble_peripheral_mtu(simpleble_peripheral_t handle);
-function simpleble_peripheral_mtu(handle: TSimpleBlePeripheral): UInt16; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralMtu(handle: TSimpleBlePeripheral): UInt16; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_mtu';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_connect(simpleble_peripheral_t handle);
-function simpleble_peripheral_connect(handle: TSimpleBlePeripheral): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralConnect(handle: TSimpleBlePeripheral): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_connect';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_disconnect(simpleble_peripheral_t handle);
-function simpleble_peripheral_disconnect(handle: TSimpleBlePeripheral): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralDisconnect(handle: TSimpleBlePeripheral): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_disconnect';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_is_connected(simpleble_peripheral_t handle, bool* connected);
-function simpleble_peripheral_is_connected(handle: TSimpleBlePeripheral; var connected: Boolean): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralIsConnected(handle: TSimpleBlePeripheral; var connected: Boolean): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_is_connected';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_is_connectable(simpleble_peripheral_t handle, bool* connectable);
-function simpleble_peripheral_is_connectable(handle: TSimpleBlePeripheral; var connectable: Boolean): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralIsConnectable(handle: TSimpleBlePeripheral; var connectable: Boolean): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_is_connectable';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_is_paired(simpleble_peripheral_t handle, bool* paired);
-function simpleble_peripheral_is_paired(handle: TSimpleBlePeripheral; var paired: Boolean): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralIsPaired(handle: TSimpleBlePeripheral; var paired: Boolean): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_is_paired';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_unpair(simpleble_peripheral_t handle);
-function simpleble_peripheral_unpair(handle: TSimpleBlePeripheral): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralUnpair(handle: TSimpleBlePeripheral): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_unpair';
 
 //SIMPLEBLE_EXPORT size_t simpleble_peripheral_services_count(simpleble_peripheral_t handle);
-function simpleble_peripheral_services_count(handle: TSimpleBlePeripheral): NativeUInt; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralServicesCount(handle: TSimpleBlePeripheral): NativeUInt; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_services_count';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_services_get(simpleble_peripheral_t handle, size_t index, simpleble_service_t* services);
-function simpleble_peripheral_services_get(handle: TSimpleBlePeripheral; index: NativeUInt; var services: TSimpleBleService): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralServicesGet(handle: TSimpleBlePeripheral; index: NativeUInt; var services: TSimpleBleService): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_services_get';
 
 //SIMPLEBLE_EXPORT size_t simpleble_peripheral_manufacturer_data_count(simpleble_peripheral_t handle);
-function simpleble_peripheral_manufacturer_data_count(handle: TSimpleBlePeripheral): NativeUInt; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralManufacturerDataCount(handle: TSimpleBlePeripheral): NativeUInt; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_manufacturer_data_count';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_manufacturer_data_get(simpleble_peripheral_t handle, size_t index, simpleble_manufacturer_data_t* manufacturer_data);
-function simpleble_peripheral_manufacturer_data_get(handle: TSimpleBlePeripheral; index: NativeUInt; var manufacturer_data: TSimpleBleManufacturerData): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralManufacturerDataGet(handle: TSimpleBlePeripheral; index: NativeUInt; var manufacturer_data: TSimpleBleManufacturerData): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_manufacturer_data_get';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_read(simpleble_peripheral_t handle, simpleble_uuid_t service, simpleble_uuid_t characteristic, uint8_t** data, size_t* data_length);
-function simpleble_peripheral_read(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; data: PByte; var data_length: NativeUInt): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralRead(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; data: PByte; var data_length: NativeUInt): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_read';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_write_request(simpleble_peripheral_t handle, simpleble_uuid_t service, simpleble_uuid_t characteristic, const uint8_t* data, size_t data_length);
-function simpleble_peripheral_write_request(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; data: PByte; data_length: NativeUInt): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralWriteRequest(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; data: PByte; data_length: NativeUInt): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_write_request';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_write_command(simpleble_peripheral_t handle, simpleble_uuid_t service, simpleble_uuid_t characteristic, const uint8_t* data, size_t data_length);
-function simpleble_peripheral_write_command(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; data: PByte; data_length: NativeUInt): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralWriteCommand(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; data: PByte; data_length: NativeUInt): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_write_command';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_notify(simpleble_peripheral_t handle, simpleble_uuid_t service, simpleble_uuid_t characteristic, void (*callback)(simpleble_uuid_t service, simpleble_uuid_t characteristic, const uint8_t* data, size_t data_length, void* userdata), void* userdata);
-function simpleble_peripheral_notify(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; callback: TSimpleBleCallbackNotify; userdata: PPointer): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralNotify(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; callback: TSimpleBleCallbackNotify; userdata: PPointer): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_notify';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_indicate(simpleble_peripheral_t handle, simpleble_uuid_t service, simpleble_uuid_t characteristic, void (*callback)(simpleble_uuid_t service, simpleble_uuid_t characteristic, const uint8_t* data, size_t data_length, void* userdata), void* userdata);
-function simpleble_peripheral_indicate(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; callback: TSimpleBleCallbackIndicate; userdata: PPointer): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralIndicate(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; callback: TSimpleBleCallbackIndicate; userdata: PPointer): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_indicate';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_unsubscribe(simpleble_peripheral_t handle, simpleble_uuid_t service, simpleble_uuid_t characteristic);
-function simpleble_peripheral_unsubscribe(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid):TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralUnsubscribe(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid):TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_unsubscribe';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_read_descriptor(simpleble_peripheral_t handle, simpleble_uuid_t service, simpleble_uuid_t characteristic, simpleble_uuid_t descriptor, uint8_t** data, size_t* data_length);
-function simpleble_peripheral_read_descriptor(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; descriptor: TSimpleBleUuid; data: PByte; var data_length: NativeUInt): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralReadDescriptor(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; descriptor: TSimpleBleUuid; data: PByte; var data_length: NativeUInt): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_read_descriptor';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_write_descriptor(simpleble_peripheral_t handle, simpleble_uuid_t service, simpleble_uuid_t characteristic, simpleble_uuid_t descriptor, const uint8_t* data, size_t data_length);
-function simpleble_peripheral_write_descriptor(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; descriptor: TSimpleBleUuid; data: PByte; data_length: NativeUInt): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralWriteDescriptor(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; descriptor: TSimpleBleUuid; data: PByte; data_length: NativeUInt): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_write_descriptor';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_set_callback_on_connected(simpleble_peripheral_t handle, void (*callback)(simpleble_peripheral_t peripheral, void* userdata), void* userdata);
-function simpleble_peripheral_set_callback_on_connected(handle: TSimpleBlePeripheral; callback: TSimpleBleCallbackOnConnected; userdata: PPointer): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralSetCallbackOnConnected(handle: TSimpleBlePeripheral; callback: TSimpleBleCallbackOnConnected; userdata: PPointer): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_set_callback_on_connected';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_set_callback_on_disconnected(simpleble_peripheral_t handle, void (*callback)(simpleble_peripheral_t peripheral, void* userdata), void* userdata);
-function simpleble_peripheral_set_callback_on_disconnected(handle: TSimpleBlePeripheral; callback: TSimpleBleCallbackOnDisconnected; userdata: PPointer): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
+function SimpleBlePeripheralSetCallbackOnDisconnected(handle: TSimpleBlePeripheral; callback: TSimpleBleCallbackOnDisconnected; userdata: PPointer): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_set_callback_on_disconnected';
 
 
 { functions from SimpleBLE simpleble.h }
 
 //SIMPLEBLE_EXPORT void simpleble_free(void* handle);
-procedure simpleble_free(var handle); cdecl; external SimpleBleExtLibrary;
+procedure SimpleBleFree(var handle); cdecl; external SimpleBleExtLibrary name 'simpleble_free';
 
 
 { functions from SimpleBLE logging.h }
@@ -311,16 +311,16 @@ type
   TCallbackLog = procedure(level: TSimpleBleLogLevel; module: PChar; lfile: PChar; line: DWord; lfunction: PChar; lmessage: PChar);
 
 //SIMPLEBLE_EXPORT void simpleble_logging_set_level(simpleble_log_level_t level);
-procedure simpleble_logging_set_level(level: TSimpleBleLogLevel); cdecl; external SimpleBleExtLibrary;
+procedure SimpleBleLoggingSetLevel(level: TSimpleBleLogLevel); cdecl; external SimpleBleExtLibrary name 'simpleble_logging_set_level';
 
 //SIMPLEBLE_EXPORT void simpleble_logging_set_callback(simpleble_log_callback_t callback);
-procedure simpleble_logging_set_callback(callback: TCallbackLog); cdecl; external SimpleBleExtLibrary;
+procedure SimpleBlLloggingSetCallback(callback: TCallbackLog); cdecl; external SimpleBleExtLibrary name 'simpleble_logging_set_callback';
 
 
 { functions from SimpleBLE utils.h }
 
 //simpleble_os_t get_operating_system(void);
-function get_operating_system(): TSimpleBleOs; cdecl; external SimpleBleExtLibrary;
+function SimpleBleGetOperatingSystem(): TSimpleBleOs; cdecl; external SimpleBleExtLibrary name 'get_operating_system';
 
 
 implementation

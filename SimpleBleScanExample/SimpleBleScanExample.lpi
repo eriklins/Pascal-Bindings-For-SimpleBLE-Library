@@ -140,6 +140,7 @@
       <Unit>
         <Filename Value="..\SimpleBleUnit\simpleble.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="SimpleBle"/>
       </Unit>
     </Units>
   </ProjectOptions>
