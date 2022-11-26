@@ -76,6 +76,11 @@ type
   //} simpleble_characteristic_t;
   TSimpleBleCharacteristic = record
     Uuid: TSimpleBleUuid;
+    CanRead: Boolean;
+    CanWriteRequest: Boolean;
+    CanWriteCommand: Boolean;
+    CanNotify: Boolean;
+    CanIndicate: Boolean;
     DescriptorCount: NativeUInt;
     Descriptors: array[0..SIMPLEBLE_DESCRIPTOR_MAX_COUNT-1] of TSimpleBleDescriptor;
   end;
@@ -205,6 +210,9 @@ function simpleble_peripheral_address(handle: TSimpleBlePeripheral): PChar; cdec
 //SIMPLEBLE_EXPORT int16_t simpleble_peripheral_rssi(simpleble_peripheral_t handle);
 function simpleble_peripheral_rssi(handle: TSimpleBlePeripheral): Int16; cdecl; external SimpleBleExtLibrary;
 
+//SIMPLEBLE_EXPORT uint16_t simpleble_peripheral_mtu(simpleble_peripheral_t handle);
+function simpleble_peripheral_mtu(handle: TSimpleBlePeripheral): UInt16; cdecl; external SimpleBleExtLibrary;
+
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_connect(simpleble_peripheral_t handle);
 function simpleble_peripheral_connect(handle: TSimpleBlePeripheral): TSimpleBleErr; cdecl; external SimpleBleExtLibrary;
 
@@ -284,7 +292,13 @@ type
   //  SIMPLEBLE_LOG_LEVEL_DEBUG,
   //  SIMPLEBLE_LOG_LEVEL_VERBOSE
   //} simpleble_log_level_t;
-  TSimpleBleLogLevel = (SIMPLEBLE_LOG_LEVEL_NONE = 0, SIMPLEBLE_LOG_LEVEL_FATAL = 1, SIMPLEBLE_LOG_LEVEL_ERROR = 2, SIMPLEBLE_LOG_LEVEL_WARN = 3, SIMPLEBLE_LOG_LEVEL_INFO = 4, SIMPLEBLE_LOG_LEVEL_DEBUG = 5, SIMPLEBLE_LOG_LEVEL_VERBOSE = 6);
+  TSimpleBleLogLevel = (SIMPLEBLE_LOG_LEVEL_NONE = 0,
+                       SIMPLEBLE_LOG_LEVEL_FATAL = 1,
+                       SIMPLEBLE_LOG_LEVEL_ERROR = 2,
+                       SIMPLEBLE_LOG_LEVEL_WARN = 3,
+                       SIMPLEBLE_LOG_LEVEL_INFO = 4,
+                       SIMPLEBLE_LOG_LEVEL_DEBUG = 5,
+                       SIMPLEBLE_LOG_LEVEL_VERBOSE = 6);
 
   //typedef void (*simpleble_log_callback_t)(
   //    simpleble_log_level_t level,
@@ -294,7 +308,6 @@ type
   //    const char* function,
   //    const char* message
   //);
-  // ???
   TCallbackLog = procedure(level: TSimpleBleLogLevel; module: PChar; lfile: PChar; line: DWord; lfunction: PChar; lmessage: PChar);
 
 //SIMPLEBLE_EXPORT void simpleble_logging_set_level(simpleble_log_level_t level);
