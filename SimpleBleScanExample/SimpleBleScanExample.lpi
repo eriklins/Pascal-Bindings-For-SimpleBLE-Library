@@ -94,6 +94,10 @@
               <GenerateDebugInfo Value="False"/>
               <DebugInfoType Value="dsDwarf3"/>
             </Debugging>
+            <Options>
+              <PassLinkerOptions Value="True"/>
+              <LinkerOptions Value="-R ./"/>
+            </Options>
           </Linking>
         </CompilerOptions>
       </Item>
@@ -121,6 +125,10 @@
               <GenerateDebugInfo Value="False"/>
               <DebugInfoType Value="dsDwarf3"/>
             </Debugging>
+            <Options>
+              <PassLinkerOptions Value="True"/>
+              <LinkerOptions Value="-R ./"/>
+            </Options>
           </Linking>
         </CompilerOptions>
       </Item>
@@ -140,6 +148,7 @@
       <Unit>
         <Filename Value="..\SimpleBleUnit\simpleble.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="SimpleBle"/>
       </Unit>
     </Units>
   </ProjectOptions>
@@ -158,10 +167,6 @@
       <Debugging>
         <DebugInfoType Value="dsDwarf3"/>
       </Debugging>
-      <Options>
-        <PassLinkerOptions Value="True"/>
-        <LinkerOptions Value="-R ./"/>
-      </Options>
     </Linking>
   </CompilerOptions>
   <Debugging>

@@ -49,22 +49,22 @@ procedure AdapterOnScanStart(Adapter: TSimpleBleAdapter; Userdata: PPointer);
 var
   Identifier: PChar;
 begin
-  Identifier := simpleble_adapter_identifier(Adapter);
+  Identifier := SimpleBleAdapterIdentifier(Adapter);
   if Identifier = '' then
     Exit;
   WriteLn('Adapter ' + Identifier + ' started scanning.');
-  simpleble_free(Identifier);
+  SimpleBleFree(Identifier);
 end;
 
 procedure AdapterOnScanStop(Adapter: TSimpleBleAdapter; Userdata: PPointer);
 var
   Identifier: PChar;
 begin
-  Identifier := simpleble_adapter_identifier(Adapter);
+  Identifier := SimpleBleAdapterIdentifier(Adapter);
   if Identifier = '' then
     Exit;
   WriteLn('Adapter ' + Identifier + ' started scanning.');
-  simpleble_free(Identifier);
+  SimpleBleFree(Identifier);
 end;
 
 procedure AdapterOnScanFound(Adapter: TSimpleBleAdapter; Peripheral: TSimpleBlePeripheral; Userdata: PPointer);
@@ -73,9 +73,9 @@ var
   PeripheralIdentifier: PChar;
   PeripheralAddress: PChar;
 begin
-  AdapterIdentifier := simpleble_adapter_identifier(Adapter);
-  PeripheralIdentifier := simpleble_peripheral_identifier(Peripheral);
-  PeripheralAddress := simpleble_peripheral_address(Peripheral);
+  AdapterIdentifier := SimpleBleAdapterIdentifier(Adapter);
+  PeripheralIdentifier := SimpleBlePeripheralIdentifier(Peripheral);
+  PeripheralAddress := SimpleBlePeripheralAddress(Peripheral);
   if (AdapterIdentifier = '') or (PeripheralAddress = '') then
     Exit;
   WriteLn('Adapter ' + AdapterIdentifier + ' found device: ' + PeripheralIdentifier + ' [' + PeripheralAddress + ']');
@@ -88,10 +88,10 @@ begin
   else
   begin
     // As there was no space left for this Peripheral, release the associated handle.
-    simpleble_peripheral_release_handle(Peripheral);
+    SimpleBleAdapterReleaseHandle(Peripheral);
   end;
-  simpleble_free(PeripheralIdentifier);
-  simpleble_free(PeripheralAddress);
+  SimpleBleFree(PeripheralIdentifier);
+  SimpleBleFree(PeripheralAddress);
 end;
 
 { -------------------------------- }
@@ -124,7 +124,7 @@ begin
   end;
 
   // look for BLE adapters
-  if simpleble_adapter_get_count() = 0 then
+  if SimpleBleAdapterGetCount() = 0 then
   begin
     WriteLn('No BLE adapter was found.');
     Terminate;
@@ -132,7 +132,7 @@ begin
   end;
 
   // get a handle for the BLE Adapter
-  Adapter := simpleble_adapter_get_handle(0);
+  Adapter := SimpleBleAdapterGetHandle(0);
   if Adapter = 0 then
   begin
     WriteLn('Could not get handle for BLE adapter.');
@@ -142,23 +142,23 @@ begin
   WriteLn('Found BLE adapter and got handle.');
 
   // register SimpleBLE scan callback functions
-  simpleble_adapter_set_callback_on_scan_start(Adapter, @AdapterOnScanStart, Nil);
-  simpleble_adapter_set_callback_on_scan_stop(Adapter, @AdapterOnScanStop, Nil);
-  simpleble_adapter_set_callback_on_scan_found(Adapter, @AdapterOnScanFound, Nil);
+  SimpleBleAdapterSetCallbackOnScanStart(Adapter, @AdapterOnScanStart, Nil);
+  SimpleBleAdapterSetCallbackOnScanStop(Adapter, @AdapterOnScanStop, Nil);
+  SimpleBleAdapterSetCallbackOnScanFound(Adapter, @AdapterOnScanFound, Nil);
 
   // start BLE scanning for 5 seconds
-  simpleble_adapter_scan_for(Adapter, 5000);
+  SimpleBleAdapterScanFor(Adapter, 5000);
 
   // show list of found devices
   WriteLn('The following devices were found:');
   for i := 0 to (PeripheralListLen - 1) do
   begin
     Peripheral := PeripheralList[i];
-    PeripheralIdentifier := simpleble_peripheral_identifier(Peripheral);
-    PeripheralAddress := simpleble_peripheral_address(Peripheral);
+    PeripheralIdentifier := SimpleBlePeripheralIdentifier(Peripheral);
+    PeripheralAddress := SimpleBlePeripheralAddress(Peripheral);
     WriteLn('[' + IntToStr(i) + '] ' + PeripheralIdentifier + ' [' + PeripheralAddress + ']');
-    simpleble_free(PeripheralIdentifier);
-    simpleble_free(PeripheralAddress);
+    SimpleBleFree(PeripheralIdentifier);
+    SimpleBleFree(PeripheralAddress);
   end;
 
   // select a device to connect to
@@ -173,24 +173,24 @@ begin
 
   // connect to device
   Peripheral := PeripheralList[Selection];
-  PeripheralIdentifier := simpleble_peripheral_identifier(Peripheral);
-  PeripheralAddress := simpleble_peripheral_address(Peripheral);
+  PeripheralIdentifier := SimpleBlePeripheralIdentifier(Peripheral);
+  PeripheralAddress := SimpleBlePeripheralAddress(Peripheral);
   WriteLn('Connecting to ' + PeripheralIdentifier + ' [' + PeripheralAddress + ']');
-  simpleble_free(PeripheralIdentifier);
-  simpleble_free(PeripheralAddress);
-  ErrCode := simpleble_peripheral_connect(Peripheral);
+  SimpleBleFree(PeripheralIdentifier);
+  SimpleBleFree(PeripheralAddress);
+  ErrCode := SimpleBlePeripheralConnect(Peripheral);
   if ErrCode <> SIMPLEBLE_SUCCESS then
   begin
     WriteLn('Failed to connect.');
     Terminate;
   end;
-  ServicesCount := simpleble_peripheral_services_count(Peripheral);
+  ServicesCount := SimpleBlePeripheralServicesCount(Peripheral);
   WriteLn('Successfully connected, listing ' + IntToStr(ServicesCount) + ' services.');
 
   // show gatt table with services and characteristics
   for i := 0 to (ServicesCount - 1) do
   begin
-    ErrCode := simpleble_peripheral_services_get(Peripheral, i, Service);
+    ErrCode := SimpleBlePeripheralServicesGet(Peripheral, i, Service);
     if ErrCode <> SIMPLEBLE_SUCCESS then
     begin
       WriteLn('Failed to get service.');
@@ -209,10 +209,10 @@ begin
   ReadLn();
 
   // and disconnect again from device
-  simpleble_peripheral_disconnect(Peripheral);
+  SimpleBlePeripheralDisconnect(Peripheral);
 
   // release the BLE handle
-  simpleble_adapter_release_handle(Adapter);
+  SimpleBleAdapterReleaseHandle(Adapter);
 
   // stop program loop
   Terminate;
@@ -232,9 +232,9 @@ begin
   WriteLn('Releasing allocated resources.');
   // Release all saved peripherals
   for i := 0 to (PeripheralListLen - 1) do
-    simpleble_peripheral_release_handle(PeripheralList[i]);
+    SimpleBleAdapterReleaseHandle(PeripheralList[i]);
   // Let's not forget to release the associated handle.
-  simpleble_adapter_release_handle(Adapter);
+  SimpleBleAdapterReleaseHandle(Adapter);
 end;
 
 procedure TSimpleBleConnectExample.WriteHelp;
