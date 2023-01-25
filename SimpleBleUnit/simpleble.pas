@@ -213,22 +213,16 @@ function SimpleBlePeripheralIdentifier(handle: TSimpleBlePeripheral): PChar; cde
 
 //SIMPLEBLE_EXPORT char* simpleble_peripheral_address(simpleble_peripheral_t handle);
 function SimpleBlePeripheralAddress(handle: TSimpleBlePeripheral): PChar; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_address';
-<<<<<<< HEAD
 
 //SIMPLEBLE_EXPORT simpleble_address_type_t simpleble_peripheral_address_type(simpleble_peripheral_t handle);
 function SimpleBlePeripheralAddressType(handle: TSimpleBlePeripheral): TSimpleBleAddressType; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_address_type';
-=======
->>>>>>> 6fdcffb443c642b2a6918809a1df43c21a577c1b
 
 //SIMPLEBLE_EXPORT int16_t simpleble_peripheral_rssi(simpleble_peripheral_t handle);
 function SimpleBlePeripheralRssi(handle: TSimpleBlePeripheral): Int16; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_rssi';
 
-<<<<<<< HEAD
 //SIMPLEBLE_EXPORT int16_t simpleble_peripheral_tx_power(simpleble_peripheral_t handle);
 function SimpleBlePeripheralTxPower(handle: TSimpleBlePeripheral): Int16; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_tx_power';
 
-=======
->>>>>>> 6fdcffb443c642b2a6918809a1df43c21a577c1b
 //SIMPLEBLE_EXPORT uint16_t simpleble_peripheral_mtu(simpleble_peripheral_t handle);
 function SimpleBlePeripheralMtu(handle: TSimpleBlePeripheral): UInt16; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_mtu';
 
@@ -311,7 +305,6 @@ type
   //  SIMPLEBLE_LOG_LEVEL_DEBUG,
   //  SIMPLEBLE_LOG_LEVEL_VERBOSE
   //} simpleble_log_level_t;
-<<<<<<< HEAD
   TSimpleBleLogLevel = (SIMPLEBLE_LOG_LEVEL_NONE    = 0,
                         SIMPLEBLE_LOG_LEVEL_FATAL   = 1,
                         SIMPLEBLE_LOG_LEVEL_ERROR   = 2,
@@ -319,15 +312,6 @@ type
                         SIMPLEBLE_LOG_LEVEL_INFO    = 4,
                         SIMPLEBLE_LOG_LEVEL_DEBUG   = 5,
                         SIMPLEBLE_LOG_LEVEL_VERBOSE = 6);
-=======
-  TSimpleBleLogLevel = (SIMPLEBLE_LOG_LEVEL_NONE = 0,
-                       SIMPLEBLE_LOG_LEVEL_FATAL = 1,
-                       SIMPLEBLE_LOG_LEVEL_ERROR = 2,
-                       SIMPLEBLE_LOG_LEVEL_WARN = 3,
-                       SIMPLEBLE_LOG_LEVEL_INFO = 4,
-                       SIMPLEBLE_LOG_LEVEL_DEBUG = 5,
-                       SIMPLEBLE_LOG_LEVEL_VERBOSE = 6);
->>>>>>> 6fdcffb443c642b2a6918809a1df43c21a577c1b
 
   //typedef void (*simpleble_log_callback_t)(
   //    simpleble_log_level_t level,
