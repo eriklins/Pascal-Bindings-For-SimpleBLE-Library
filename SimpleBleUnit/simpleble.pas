@@ -327,7 +327,7 @@ type
 procedure SimpleBleLoggingSetLevel(level: TSimpleBleLogLevel); cdecl; external SimpleBleExtLibrary name 'simpleble_logging_set_level';
 
 //SIMPLEBLE_EXPORT void simpleble_logging_set_callback(simpleble_log_callback_t callback);
-procedure SimpleBlLloggingSetCallback(callback: TCallbackLog); cdecl; external SimpleBleExtLibrary name 'simpleble_logging_set_callback';
+procedure SimpleBleLoggingSetCallback(callback: TCallbackLog); cdecl; external SimpleBleExtLibrary name 'simpleble_logging_set_callback';
 
 
 { functions from SimpleBLE utils.h }
