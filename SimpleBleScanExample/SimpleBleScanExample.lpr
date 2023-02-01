@@ -64,13 +64,31 @@ var
   AdapterIdentifier: PChar;
   PeripheralIdentifier: PChar;
   PeripheralAddress: PChar;
+  ManufDataCount: NativeUInt;
+  ManufData: TSimpleBleManufacturerData;
+  i, j: Integer;
 begin
   AdapterIdentifier := SimpleBleAdapterIdentifier(Adapter);
   PeripheralIdentifier := SimpleBlePeripheralIdentifier(Peripheral);
   PeripheralAddress := SimpleBlePeripheralAddress(Peripheral);
   if (AdapterIdentifier = '') or (PeripheralAddress = '') then
     Exit;
-  WriteLn('Adapter ' + AdapterIdentifier + ' found device: ' + PeripheralIdentifier + ' [' + PeripheralAddress + ']');
+  ManufDataCount := SimpleBlePeripheralManufacturerDataCount(Peripheral);
+  Write('device found  : [' + PeripheralAddress + '] "' + PeripheralIdentifier + '"');
+  if (ManufDataCount > 0) then
+  begin
+    for i := 0 to (ManufDataCount-1) do
+    begin
+      SimpleBlePeripheralManufacturerDataGet(Peripheral, i, ManufData);
+      write(' MD[' + IntToStr(i) + ']=0x');
+      for j := 0 to ManufData.DataLength do
+      begin
+        write(IntToHex(ManufData.Data[j]));
+      end;
+    end;
+  end;
+  writeln();
+
   SimpleBlePeripheralReleaseHandle(Peripheral);
   SimpleBleFree(PeripheralIdentifier);
   SimpleBleFree(PeripheralAddress);
@@ -81,13 +99,31 @@ var
   AdapterIdentifier: PChar;
   PeripheralIdentifier: PChar;
   PeripheralAddress: PChar;
+  ManufDataCount: NativeUInt;
+  ManufData: TSimpleBleManufacturerData;
+  i, j: Integer;
 begin
   AdapterIdentifier := SimpleBleAdapterIdentifier(Adapter);
   PeripheralIdentifier := SimpleBlePeripheralIdentifier(Peripheral);
   PeripheralAddress := SimpleBlePeripheralAddress(Peripheral);
   if (AdapterIdentifier = '') or (PeripheralAddress = '') then
     Exit;
-  WriteLn('Adapter ' + AdapterIdentifier + ' updated device: ' + PeripheralIdentifier + ' [' + PeripheralAddress + ']');
+  ManufDataCount := SimpleBlePeripheralManufacturerDataCount(Peripheral);
+  Write('device updated: [' + PeripheralAddress + '] "' + PeripheralIdentifier + '"');
+  if (ManufDataCount > 0) then
+  begin
+    for i := 0 to (ManufDataCount-1) do
+    begin
+      SimpleBlePeripheralManufacturerDataGet(Peripheral, i, ManufData);
+      write(' MD[' + IntToStr(i) + ']=0x');
+      for j := 0 to ManufData.DataLength do
+      begin
+        write(IntToHex(ManufData.Data[j]));
+      end;
+    end;
+  end;
+  writeln();
+
   SimpleBlePeripheralReleaseHandle(Peripheral);
   SimpleBleFree(PeripheralIdentifier);
   SimpleBleFree(PeripheralAddress);
