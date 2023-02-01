@@ -66,15 +66,16 @@ var
   PeripheralAddress: PChar;
   ManufDataCount: NativeUInt;
   ManufData: TSimpleBleManufacturerData;
-  i, j: Integer;
+  i, j, rssi: Integer;
 begin
   AdapterIdentifier := SimpleBleAdapterIdentifier(Adapter);
   PeripheralIdentifier := SimpleBlePeripheralIdentifier(Peripheral);
   PeripheralAddress := SimpleBlePeripheralAddress(Peripheral);
   if (AdapterIdentifier = '') or (PeripheralAddress = '') then
     Exit;
+  rssi := SimpleBlePeripheralRssi(Peripheral);
   ManufDataCount := SimpleBlePeripheralManufacturerDataCount(Peripheral);
-  Write('device found  : [' + PeripheralAddress + '] "' + PeripheralIdentifier + '"');
+  Write('device found  : [' + PeripheralAddress + '] ' + IntToStr(rssi) + 'dBm "' + PeripheralIdentifier + '"');
   if (ManufDataCount > 0) then
   begin
     for i := 0 to (ManufDataCount-1) do
@@ -101,15 +102,16 @@ var
   PeripheralAddress: PChar;
   ManufDataCount: NativeUInt;
   ManufData: TSimpleBleManufacturerData;
-  i, j: Integer;
+  i, j, rssi: Integer;
 begin
   AdapterIdentifier := SimpleBleAdapterIdentifier(Adapter);
   PeripheralIdentifier := SimpleBlePeripheralIdentifier(Peripheral);
   PeripheralAddress := SimpleBlePeripheralAddress(Peripheral);
   if (AdapterIdentifier = '') or (PeripheralAddress = '') then
     Exit;
+  rssi := SimpleBlePeripheralRssi(Peripheral);
   ManufDataCount := SimpleBlePeripheralManufacturerDataCount(Peripheral);
-  Write('device updated: [' + PeripheralAddress + '] "' + PeripheralIdentifier + '"');
+  Write('device updated: [' + PeripheralAddress + '] ' + IntToStr(rssi) + 'dBm "' + PeripheralIdentifier + '"');
   if (ManufDataCount > 0) then
   begin
     for i := 0 to (ManufDataCount-1) do
