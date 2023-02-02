@@ -26,7 +26,7 @@ Currently the Pascal bindings have been implemented and tested with Lazarus vers
 ## Examples
 The original SimpleBLE project comes with three C examples, which have been ported to Lazarus:
 
-* **SimpleBleScanExample**: A console application based on scan.c from SimpleBLE and demonstrates scanning for BLE advertisements from peripherals. The output shows a list of devices with device name (if present) and BLE MAC address.
+* **SimpleBleScanExample**: A console application based on scan.c from SimpleBLE and demonstrates scanning for BLE advertisements from peripherals. The output shows a list of devices with BLE MAC address, device name (if present), RSSI value and manufacturer data (if present).
 * **SimpleBleConnectExample**: A console application based on connect.c from SimpleBLE and demonstrates
   * Scanning for BLE advertisements from peripherals like above.
   * Selecting a peripheral to connect to.
