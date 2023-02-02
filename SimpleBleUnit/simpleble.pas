@@ -56,7 +56,7 @@ type
   TSimpleBleErr = (SIMPLEBLE_SUCCESS = 0, SIMPLEBLE_FAILURE = 1);
 
   //typedef struct {
-  //  char value[SIMPLEBLE_UUID_STR_LEN];
+  //    char value[SIMPLEBLE_UUID_STR_LEN];
   //} simpleble_uuid_t;
   TSimpleBleUuid = record
     Value: array[0..SIMPLEBLE_UUID_STR_LEN-1] of Char;
@@ -71,6 +71,11 @@ type
 
   //typedef struct {
   //    simpleble_uuid_t uuid;
+  //    bool can_read;
+  //    bool can_write_request;
+  //    bool can_write_command;
+  //    bool can_notify;
+  //    bool can_indicate;
   //    size_t descriptor_count;
   //    simpleble_descriptor_t descriptors[SIMPLEBLE_DESCRIPTOR_MAX_COUNT];
   //} simpleble_characteristic_t;
@@ -86,9 +91,9 @@ type
   end;
 
   //typedef struct {
-  //  simpleble_uuid_t uuid;
-  //  size_t characteristic_count;
-  //  simpleble_characteristic_t characteristics[SIMPLEBLE_CHARACTERISTIC_MAX_COUNT];
+  //    simpleble_uuid_t uuid;
+  //    size_t characteristic_count;
+  //    simpleble_characteristic_t characteristics[SIMPLEBLE_CHARACTERISTIC_MAX_COUNT];
   //} simpleble_service_t;
   TSimpleBleService = record
     Uuid: TSimpleBleUuid;
@@ -118,9 +123,9 @@ type
   TSimpleBlePeripheral = NativeUInt;
 
   //typedef enum {
-  //  SIMPLEBLE_OS_WINDOWS = 0,
-  //  SIMPLEBLE_OS_MACOS = 1,
-  //  SIMPLEBLE_OS_LINUX = 2,
+  //    SIMPLEBLE_OS_WINDOWS = 0,
+  //    SIMPLEBLE_OS_MACOS = 1,
+  //    SIMPLEBLE_OS_LINUX = 2,
   //} simpleble_os_t;
   TSimpleBleOs = (SIMPLEBLE_OS_WINDOWS = 0, SIMPLEBLE_OS_MACOS = 1, SIMPLEBLE_OS_LINUX = 2);
 
