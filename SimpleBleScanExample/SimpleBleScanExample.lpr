@@ -14,6 +14,10 @@ program SimpleBleScanExample;
     https://github.com/OpenBluetoothToolbox/SimpleBLE
 }
 
+{$UNDEF DYNAMIC_LOADING}
+{$IFDEF WINDOWS}
+  //{$DEFINE DYNAMIC_LOADING}    { UNCOMMENT IF YOU WANT DYNAMIC LOADING }
+{$ENDIF}
 
 uses
   {$IFDEF UNIX}
@@ -140,6 +144,15 @@ var
   Adapter: TSimplebleAdapter;
 
 begin
+
+  {$IFDEF DYNAMIC_LOADING}
+  if not SimpleBleLoadLibrary() then begin
+    writeln('Failed to load library');
+    readln;
+    exit;
+  end;
+  {$ENDIF}
+
   // quick check parameters
   ErrorMsg:=CheckOptions('h', 'help');
   if ErrorMsg<>'' then begin
@@ -187,6 +200,10 @@ begin
 
   // release the BLE handle
   SimpleBleAdapterReleaseHandle(Adapter);
+
+  {$IFDEF DYNAMIC_LOADING}
+  SimpleBleUnloadLibrary();
+  {$ENDIF}
 
   // stop program loop
   Terminate;
