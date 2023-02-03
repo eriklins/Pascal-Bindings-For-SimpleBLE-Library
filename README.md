@@ -45,6 +45,9 @@ On Windows the example projects build without issues.
 
 On Linux (tested on Ubuntu 20.04LTS) it's necessary to copy the shared libraries into the root folder of each example project.
 
+### Dynamic Library Loading on Windows
+By default the DLLs will be loaded statically and if there is a problem (e.g. DLL file not found) then the program will throw a system error and fail. By enabling dynamic loading of the DLL with {$DEFINE DYNAMIC_LOADING} in SimpleBle.pas and adding the respective code for loading to your application (see examples for details), now the application could handle the error (e.g. providing an error message or operate at reduced functionality). Thanks to @Gnome16 for contributing this.
+
 ## Building the SimpleBLE Shared Libraries
 The SimpleBLE project comes with batch files / shell scripts for Windows / Linux which automagically compile the shared libraries. These are located in the "utils" folder of the SimpleBLE repo. However, for me it did not work under Linux/Ubuntu properly.
 
