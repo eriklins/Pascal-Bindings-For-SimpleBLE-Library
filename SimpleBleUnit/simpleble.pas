@@ -674,11 +674,11 @@ begin
 
   then
   begin
-    writeln('Fail');
+    //writeln('Fail');
     SimpleBleUnloadLibrary;
     exit;
   end;
-  writeln('Success');
+  //writeln('Success');
   result:=true;
 end;
 
