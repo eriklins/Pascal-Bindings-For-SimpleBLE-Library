@@ -269,7 +269,7 @@ function SimpleBlePeripheralManufacturerDataCount(handle: TSimpleBlePeripheral):
 function SimpleBlePeripheralManufacturerDataGet(handle: TSimpleBlePeripheral; index: NativeUInt; var manufacturer_data: TSimpleBleManufacturerData): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_manufacturer_data_get';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_read(simpleble_peripheral_t handle, simpleble_uuid_t service, simpleble_uuid_t characteristic, uint8_t** data, size_t* data_length);
-function SimpleBlePeripheralRead(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; data: PByte; var data_length: NativeUInt): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_read';
+function SimpleBlePeripheralRead(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; var data: PByte; var data_length: NativeUInt): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_read';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_write_request(simpleble_peripheral_t handle, simpleble_uuid_t service, simpleble_uuid_t characteristic, const uint8_t* data, size_t data_length);
 function SimpleBlePeripheralWriteRequest(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; data: PByte; data_length: NativeUInt): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_write_request';
@@ -287,7 +287,7 @@ function SimpleBlePeripheralIndicate(handle: TSimpleBlePeripheral; service: TSim
 function SimpleBlePeripheralUnsubscribe(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid):TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_unsubscribe';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_read_descriptor(simpleble_peripheral_t handle, simpleble_uuid_t service, simpleble_uuid_t characteristic, simpleble_uuid_t descriptor, uint8_t** data, size_t* data_length);
-function SimpleBlePeripheralReadDescriptor(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; descriptor: TSimpleBleUuid; data: PByte; var data_length: NativeUInt): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_read_descriptor';
+function SimpleBlePeripheralReadDescriptor(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; descriptor: TSimpleBleUuid; var data: PByte; var data_length: NativeUInt): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_read_descriptor';
 
 //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_write_descriptor(simpleble_peripheral_t handle, simpleble_uuid_t service, simpleble_uuid_t characteristic, simpleble_uuid_t descriptor, const uint8_t* data, size_t data_length);
 function SimpleBlePeripheralWriteDescriptor(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; descriptor: TSimpleBleUuid; data: PByte; data_length: NativeUInt): TSimpleBleErr; cdecl; external SimpleBleExtLibrary name 'simpleble_peripheral_write_descriptor';
@@ -413,13 +413,13 @@ var
   SimpleBlePeripheralServicesGet : function(handle: TSimpleBlePeripheral; index: NativeUInt; var services: TSimpleBleService): TSimpleBleErr; cdecl;
   SimpleBlePeripheralManufacturerDataCount : function(handle: TSimpleBlePeripheral): NativeUInt; cdecl;
   SimpleBlePeripheralManufacturerDataGet : function(handle: TSimpleBlePeripheral; index: NativeUInt; var manufacturer_data: TSimpleBleManufacturerData): TSimpleBleErr; cdecl;
-  SimpleBlePeripheralRead : function(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; data: PByte; var data_length: NativeUInt): TSimpleBleErr; cdecl;
+  SimpleBlePeripheralRead : function(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; var data: PByte; var data_length: NativeUInt): TSimpleBleErr; cdecl;
   SimpleBlePeripheralWriteRequest : function(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; data: PByte; data_length: NativeUInt): TSimpleBleErr; cdecl;
   SimpleBlePeripheralWriteCommand : function(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; data: PByte; data_length: NativeUInt): TSimpleBleErr; cdecl;
   SimpleBlePeripheralNotify : function(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; callback: TSimpleBleCallbackNotify; userdata: PPointer): TSimpleBleErr; cdecl;
   SimpleBlePeripheralIndicate : function(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; callback: TSimpleBleCallbackIndicate; userdata: PPointer): TSimpleBleErr; cdecl;
   SimpleBlePeripheralUnsubscribe : function(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid):TSimpleBleErr; cdecl;
-  SimpleBlePeripheralReadDescriptor : function(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; descriptor: TSimpleBleUuid; data: PByte; var data_length: NativeUInt): TSimpleBleErr; cdecl;
+  SimpleBlePeripheralReadDescriptor : function(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; descriptor: TSimpleBleUuid; var data: PByte; var data_length: NativeUInt): TSimpleBleErr; cdecl;
   SimpleBlePeripheralWriteDescriptor : function(handle: TSimpleBlePeripheral; service: TSimpleBleUuid; characteristic: TSimpleBleUuid; descriptor: TSimpleBleUuid; data: PByte; data_length: NativeUInt): TSimpleBleErr; cdecl;
   SimpleBlePeripheralSetCallbackOnConnected : function(handle: TSimpleBlePeripheral; callback: TSimpleBleCallbackOnConnected; userdata: PPointer): TSimpleBleErr; cdecl;
   SimpleBlePeripheralSetCallbackOnDisconnected : function(handle: TSimpleBlePeripheral; callback: TSimpleBleCallbackOnDisconnected; userdata: PPointer): TSimpleBleErr; cdecl;
@@ -534,16 +534,13 @@ function SimpleBleLoadLibrary(dllPath:string=''): Boolean;
 begin
   result := false;
   ClearPointers;
-  if dllPath <> '' then
-  begin
+  if dllPath <> '' then begin
     if not DirectoryExists(dllPath) then exit;
-    if rightstr(dllPath,1) <> DirectorySeparator then dllPath := dllPath+DirectorySeparator;
-    if not FileExists(dllPath+SimpleBleExtLibrary) then exit;
-    hLib := LoadLibrary(pchar(dllPath+SimpleBleExtLibrary));
-  end
-  else
-  begin
-    hLib := LoadLibrary(pchar(SimpleBleExtLibrary));
+    if rightstr(dllPath,1) <> DirectorySeparator then dllPath := dllPath + DirectorySeparator;
+    if not FileExists(dllPath + SimpleBleExtLibrary) then exit;
+    hLib := LoadLibrary(PChar(dllPath + SimpleBleExtLibrary));
+  end else begin
+    hLib := LoadLibrary(PChar(SimpleBleExtLibrary));
   end;
   if hLib = 0 then exit;
 
