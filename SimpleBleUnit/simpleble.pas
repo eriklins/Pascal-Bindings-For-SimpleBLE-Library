@@ -81,6 +81,11 @@ type
 
   //typedef struct {
   //    simpleble_uuid_t uuid;
+  //    bool can_read;
+  //    bool can_write_request;
+  //    bool can_write_command;
+  //    bool can_notify;
+  //    bool can_indicate;
   //    size_t descriptor_count;
   //    simpleble_descriptor_t descriptors[SIMPLEBLE_DESCRIPTOR_MAX_COUNT];
   //} simpleble_characteristic_t;
