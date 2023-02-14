@@ -153,9 +153,16 @@ type
 
 // new types for callback functions
 type
+  //SIMPLEBLE_EXPORT simpleble_err_t simpleble_adapter_set_callback_on_scan_start(simpleble_adapter_t handle, void (*callback)(simpleble_adapter_t adapter, void* userdata), void* userdata);
   TSimpleBleCallbackScanStart = procedure(adapter: TSimpleBleAdapter; userdata: PPointer);
+
+  //SIMPLEBLE_EXPORT simpleble_err_t simpleble_adapter_set_callback_on_scan_stop(simpleble_adapter_t handle, void (*callback)(simpleble_adapter_t adapter, void* userdata), void* userdata);
   TSimpleBleCallbackScanStop = procedure(adapter: TSimpleBleAdapter; userdata: PPointer);
+
+  //SIMPLEBLE_EXPORT simpleble_err_t simpleble_adapter_set_callback_on_scan_updated(simpleble_adapter_t handle, void (*callback)(simpleble_adapter_t adapter, simpleble_peripheral_t peripheral, void* userdata), void* userdata);
   TSimpleBleCallbackScanUpdated = procedure(adapter: TSimpleBleAdapter; peripheral: TSimpleBleAdapter; userdata: PPointer);
+
+  //SIMPLEBLE_EXPORT simpleble_err_t simpleble_adapter_set_callback_on_scan_found(simpleble_adapter_t handle, void (*callback)(simpleble_adapter_t adapter, simpleble_peripheral_t peripheral, void* userdata), void* userdata);
   TSimpleBleCallbackScanFound = procedure(adapter: TSimpleBleAdapter; peripheral: TSimpleBleAdapter; userdata: PPointer);
 
 //SIMPLEBLE_EXPORT bool simpleble_adapter_is_bluetooth_enabled(void);
@@ -217,9 +224,16 @@ function SimpleBleAdapterSetCallbackOnScanFound(handle: TSimpleBleAdapter; callb
 
 // new types for callback functions
 type
+  //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_set_callback_on_connected(simpleble_peripheral_t handle, void (*callback)(simpleble_peripheral_t peripheral, void* userdata), void* userdata);
   TSimpleBleCallbackOnConnected = procedure(peripheral: TSimpleBlePeripheral; userdata: PPointer);
+
+  //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_set_callback_on_disconnected(simpleble_peripheral_t handle, void (*callback)(simpleble_peripheral_t peripheral, void* userdata), void* userdata);
   TSimpleBleCallbackOnDisconnected = procedure(peripheral: TSimpleBlePeripheral; userdata: PPointer);
+
+  //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_notify(simpleble_peripheral_t handle, simpleble_uuid_t service, simpleble_uuid_t characteristic, void (*callback)(simpleble_uuid_t service, simpleble_uuid_t characteristic, const uint8_t* data, size_t data_length, void* userdata), void* userdata);
   TSimpleBleCallbackNotify = procedure(service: TSimpleBleUuid; characteristic: TSimpleBleUuid; data: PByte; data_length: NativeUInt; userdata: PPointer);
+
+  //SIMPLEBLE_EXPORT simpleble_err_t simpleble_peripheral_indicate(simpleble_peripheral_t handle, simpleble_uuid_t service, simpleble_uuid_t characteristic, void (*callback)(simpleble_uuid_t service, simpleble_uuid_t characteristic, const uint8_t* data, size_t data_length, void* userdata), void* userdata);
   TSimpleBleCallbackIndicate = procedure(service: TSimpleBleUuid; characteristic: TSimpleBleUuid; data: PByte; data_length: NativeUInt; userdata: PPointer);
 
 //SIMPLEBLE_EXPORT void simpleble_peripheral_release_handle(simpleble_peripheral_t handle);
@@ -349,8 +363,8 @@ procedure SimpleBleloggingSetCallback(callback: TCallbackLog); cdecl; external S
 
 { functions from SimpleBLE utils.h }
 
-//simpleble_os_t get_operating_system(void);
-//function SimpleBleGetOperatingSystem(): TSimpleBleOs; cdecl; external SimpleBleExtLibrary name 'get_operating_system';
+//SIMPLEBLE_EXPORT simpleble_os_t get_operating_system(void);
+function SimpleBleGetOperatingSystem(): TSimpleBleOs; cdecl; external SimpleBleExtLibrary name 'get_operating_system';
 
 
 {$ELSE}
@@ -457,7 +471,7 @@ var
 { functions from SimpleBLE utils.h }
 
 //var
-//  SimpleBleGetOperatingSystem : function(): TSimpleBleOs; cdecl;
+  SimpleBleGetOperatingSystem : function(): TSimpleBleOs; cdecl;
 
 {$ENDIF}
 
@@ -530,7 +544,7 @@ begin
   pointer(SimpleBleloggingSetCallback) := Nil;
 
   { functions from SimpleBLE utils.h }
-  //pointer(SimpleBleGetOperatingSystem) := Nil;
+  pointer(SimpleBleGetOperatingSystem) := Nil;
 end;
 
 
@@ -607,7 +621,7 @@ begin
     pointer(SimpleBleloggingSetCallback) := GetProcedureAddress(hLib, 'simpleble_logging_set_callback');
 
     { functions from SimpleBLE utils.h }
-    //pointer(SimpleBleGetOperatingSystem) := GetProcedureAddress(hLib, 'get_operating_system');
+    pointer(SimpleBleGetOperatingSystem) := GetProcedureAddress(hLib, 'get_operating_system');
 
   except
     SimpleBleUnloadLibrary;
@@ -672,7 +686,7 @@ begin
     (pointer(SimpleBleloggingSetCallback) = Nil) // or
 
     { functions from SimpleBLE utils.h }
-    //(pointer(SimpleBleGetOperatingSystem) = Nil)
+    (pointer(SimpleBleGetOperatingSystem) = Nil)
 
   then
   begin
