@@ -458,7 +458,7 @@ var
 { functions from SimpleBLE simpleble.h }
 
 var
-  SimpleBleFree : procedure(var Handle); cdecl;
+  SimpleBleFree : procedure(Handle: Pointer); cdecl;
 
 
 { functions from SimpleBLE logging.h }
